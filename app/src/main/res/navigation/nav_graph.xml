@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fitnessFragment">
+
+    <fragment
+        android:id="@+id/fitnessFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.FitnessFragment"
+        android:label="fragment_fitness"
+        tools:layout="@layout/fragment_fitness" >
+        <action
+            android:id="@+id/action_fitnessFragment_to_fitnessProgramFragment"
+            app:destination="@id/fitnessProgramFragment"
+            app:launchSingleTop="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/fitnessProgramFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.FitnessProgramFragment"
+        android:label="fragment_fitness_program"
+        tools:layout="@layout/fragment_fitness_program" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+</navigation>

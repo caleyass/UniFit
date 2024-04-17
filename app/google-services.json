@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1035713250501",
+    "project_id": "unifit-be624",
+    "storage_bucket": "unifit-be624.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035713250501:android:5729e22bd8788fdd325cac",
+        "android_client_info": {
+          "package_name": "com.unifit.unifit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7VFN3HXVNz8pULJoJcb8DAcwHM9E49xA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
