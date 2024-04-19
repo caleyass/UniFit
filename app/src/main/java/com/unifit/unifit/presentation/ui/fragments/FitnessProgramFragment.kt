@@ -10,22 +10,24 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.unifit.unifit.databinding.FragmentFitnessProgramBinding
-import com.unifit.unifit.presentation.adapter.FitnessCategoryAdapter
 import com.unifit.unifit.presentation.adapter.FitnessWorkoutAdapter
 import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper
-import com.unifit.unifit.presentation.viewmodel.FitnessViewModel
+import com.unifit.unifit.presentation.viewmodel.FitnessCategoryViewModel
+import com.unifit.unifit.presentation.viewmodel.FitnessWorkoutViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FitnessProgramFragment : Fragment() {
 
     private var binding : FragmentFitnessProgramBinding? = null
-    private val viewModel : FitnessViewModel by viewModels()
+    @Inject lateinit var factory: FitnessWorkoutViewModel.FitnessWorkoutFactory
+    private val viewModel : FitnessWorkoutViewModel by viewModels{
+        FitnessWorkoutViewModel.provideFitnessWorkoutViewModelFactory(factory, getCategoryName())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +49,7 @@ class FitnessProgramFragment : Fragment() {
         binding?.recyclerView?.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getFitnessProgramWorkouts(getCategoryName()).collectLatest {
+            viewModel.flowFitnessWorkouts.collectLatest {
                 adapter.submitData(it)
             }
         }

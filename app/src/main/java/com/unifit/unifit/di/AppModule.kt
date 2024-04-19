@@ -25,6 +25,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
@@ -45,7 +46,7 @@ object AppModule {
     fun provideFirebaseFirestoreDb(): FirebaseFirestore {
         val db = Firebase.firestore
         db.firestoreSettings =  FirebaseFirestoreSettings.Builder()
-            .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
+            .setCacheSizeBytes(1024 * 1024)
             .build()
         return db
     }
@@ -61,15 +62,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFitnessRepository(firebaseApi: FirebaseApi,
-                                 pagerFitnessCategory : Pager<QuerySnapshot, FitnessCategory>,
-                                 pagerFitnessWorkout : Pager<QuerySnapshot, FitnessWorkout>
-    ): FitnessRepository {
-        return FitnessRepositoryImpl(
-            firebaseApi,
-            pagerFitnessCategory,
-            pagerFitnessWorkout
-        )
+    fun provideFitnessRepository(firebaseApi: FirebaseApi): FitnessRepository {
+        return FitnessRepositoryImpl(firebaseApi)
     }
 
     @Provides
@@ -78,41 +72,5 @@ object AppModule {
         return FirebaseStorage.getInstance().reference
     }
 
-    @Provides
-    @Singleton
-    fun provideFitnessCategoryPager(firebaseApi: FirebaseApi): Pager<QuerySnapshot, FitnessCategory> {
-        val q = firebaseApi.getFitnessCategories()
-        return Pager(
-            config = PagingConfig(pageSize = APP_CONSTANTS.PAGE_SIZE),
-            pagingSourceFactory = {
-                FitnessPagingSource(
-                    query = q,
-                    mapper = QueryDocumentSnapshot::toFitnessCategory
-                    )
-            }
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideFitnessWorkoutPager(
-        firebaseApi: FirebaseApi,
-        @Assisted categoryName: String
-    ): Pager<QuerySnapshot, FitnessWorkout> {
-        val q = firebaseApi.getFitnessProgramsWorkouts(categoryName)
-        return Pager(
-            config = PagingConfig(pageSize = APP_CONSTANTS.PAGE_SIZE),
-            pagingSourceFactory = {
-                FitnessPagingSource(
-                    query = q,
-                    mapper = QueryDocumentSnapshot::toFitnessWorkout
-                )
-            }
-        )
-    }
-    @AssistedFactory
-    interface FitnessWorkoutPagerFactory {
-        fun create(categoryName: String): Pager<QuerySnapshot, FitnessWorkout>
-    }
 
 }

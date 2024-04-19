@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:background="@color/transparant_white"
     android:gravity="center_vertical"
@@ -24,8 +25,7 @@
 
     <ImageView
         android:id="@+id/iv_fitness_program"
-        android:src="@drawable/fit_girl"
-        android:layout_gravity="right"
+        tools:src="@drawable/fit_girl"
         android:layout_marginHorizontal="10dp"
         android:layout_width="100dp"
         android:layout_height="100dp"/>

@@ -24,4 +24,13 @@
             android:name="name"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/starterFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.StarterFragment"
+        android:label="StarterFragment"
+        tools:layout="@layout/fragment_starter">
+        <action
+            android:id="@+id/action_starterFragment_to_fitnessFragment"
+            app:destination="@id/fitnessFragment" />
+    </fragment>
 </navigation>

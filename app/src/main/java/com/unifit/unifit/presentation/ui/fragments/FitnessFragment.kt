@@ -11,11 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.unifit.unifit.databinding.FragmentFitnessBinding
 import com.unifit.unifit.presentation.adapter.FitnessCategoryAdapter
 import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper.updatePaddingToStatusBarInsets
-import com.unifit.unifit.presentation.viewmodel.FitnessViewModel
+import com.unifit.unifit.presentation.viewmodel.FitnessCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,7 +23,7 @@ import kotlinx.coroutines.launch
 class FitnessFragment : Fragment() {
 
     private var binding : FragmentFitnessBinding? = null
-    private val viewModel : FitnessViewModel by viewModels()
+    private val viewModel : FitnessCategoryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
