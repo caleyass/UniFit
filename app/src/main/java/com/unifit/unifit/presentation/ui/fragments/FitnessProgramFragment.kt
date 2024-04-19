@@ -12,12 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.unifit.unifit.databinding.FragmentFitnessBinding
 import com.unifit.unifit.databinding.FragmentFitnessProgramBinding
-import com.unifit.unifit.presentation.adapter.FitnessProgramAdapter
+import com.unifit.unifit.presentation.adapter.FitnessCategoryAdapter
+import com.unifit.unifit.presentation.adapter.FitnessWorkoutAdapter
 import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper
 import com.unifit.unifit.presentation.viewmodel.FitnessViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -42,14 +43,12 @@ class FitnessProgramFragment : Fragment() {
     }
 
     private fun initializeRecylerView() {
-        val recyclerView : RecyclerView? = binding?.recyclerView
-
-
-        recyclerView?.layoutManager = LinearLayoutManager(this.context)
+        val adapter = FitnessWorkoutAdapter(::onFitnessProgramClicked)
+        binding?.recyclerView?.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getFitnessProgramWorkouts(getCategoryName()).collect { data ->
-                binding?.recyclerView?.adapter = FitnessProgramAdapter(data, ::onFitnessProgramClicked)
+            viewModel.getFitnessProgramWorkouts(getCategoryName()).collectLatest {
+                adapter.submitData(it)
             }
         }
     }

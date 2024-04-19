@@ -48,6 +48,7 @@ dependencies {
     implementation("androidx.fragment:fragment:1.6.2")
     implementation("com.google.firebase:firebase-firestore:24.11.0")
     implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("androidx.paging:paging-common-android:3.3.0-beta01")
     //Navigation
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -55,6 +56,7 @@ dependencies {
 
     //Room
     val room_version = "2.6.1"
+    implementation("androidx.room:room-ktx:$room_version")
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
 
@@ -90,7 +92,7 @@ dependencies {
 //    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     //Paging
     implementation("androidx.paging:paging-runtime-ktx:3.3.0-beta01")
-
+    implementation("androidx.room:room-paging:2.5.1")
 }
 kapt {
     correctErrorTypes = true

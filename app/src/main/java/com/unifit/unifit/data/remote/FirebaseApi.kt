@@ -4,14 +4,14 @@ package com.unifit.unifit.data.remote
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.StorageReference
-import com.unifit.unifit.data.local.APP_CONSTANTS
-import com.unifit.unifit.data.remote.dto.FitnessCategory
+import com.unifit.unifit.data.local.APP_CONSTANTS.Companion
+import com.unifit.unifit.data.local.APP_CONSTANTS.Companion.COLLECTION_FITNESS_PROGRAM_NAME
+import com.unifit.unifit.data.local.APP_CONSTANTS.Companion.DOCUMENT_FITNESS_PROGRAM_CATEGORIES_NAME
+import com.unifit.unifit.data.local.APP_CONSTANTS.Companion.PAGE_SIZE
+import com.unifit.unifit.data.remote.dto.FitnessCategoryDto
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -24,8 +24,15 @@ class FirebaseApi @Inject constructor(
     private val firestoreDatabase: FirebaseFirestore,
     private val storageReference: StorageReference
 ) {
-    private val categoriesDocument = firestoreDatabase.collection(APP_CONSTANTS.Companion.FIREBASE_CONSTANTS.COLLECTION_FITNESS_PROGRAM_NAME)
-        .document(APP_CONSTANTS.Companion.FIREBASE_CONSTANTS.DOCUMENT_FITNESS_PROGRAM_CATEGORIES_NAME)
+    private val categoriesDocument = firestoreDatabase.collection(COLLECTION_FITNESS_PROGRAM_NAME)
+        .document(DOCUMENT_FITNESS_PROGRAM_CATEGORIES_NAME)
+
+    fun getFitnessCategories() : Query {
+        return categoriesDocument
+            .collection("categories")
+            .orderBy("name")
+            .limit(PAGE_SIZE.toLong())
+    }
 
     suspend fun getImage(imageName: String): Uri {
         val deferredUri = CompletableDeferred<Uri>()
@@ -42,15 +49,23 @@ class FirebaseApi @Inject constructor(
         return deferredUri.await()
     }
 
-    fun getFitnessProgramWorkouts(categoryName:String = "Abdomen") : Flow<List<FitnessCategory>> = callbackFlow {
+    fun getFitnessProgramsWorkouts(categoryName:String = "Abdomen") : Query{
+        return categoriesDocument
+            .collection(categoryName)
+            .orderBy("name")
+            .limit(PAGE_SIZE.toLong())
+    }
+
+    /*fun getFitnessProgramWorkouts(categoryName:String = "Abdomen") : Flow<List<FitnessCategoryDto>> = callbackFlow {
+
         categoriesDocument
             .collection(categoryName)
             .get()
             .addOnSuccessListener{ result ->
                 trySend(result.documents.map { document ->
-                    FitnessCategory(
+                    FitnessCategoryDto(
                         name = document.id,
-                        imageResource = null
+                        imageUri = null
                     )
                 })
             }
@@ -59,37 +74,27 @@ class FirebaseApi @Inject constructor(
                 cancel(CancellationException())
             }
         awaitClose { close()}
-    }
+    }*/
+    // Pagination
+    /*suspend fun getFitnessPrograms(limit:Long) : List<FitnessCategoryDto>{
+        val deferred = CompletableDeferred<List<FitnessCategoryDto>>()
 
-    fun getFitnessPrograms() : Flow<List<FitnessCategory>> = callbackFlow {
-        categoriesDocument
-            .get()
+
+            .addOnCompleteListener { task ->
+                last = task.result.documents[task.result.size()-1]["name"].toString()
+                Log.d("Firebase", "last: ${last}")
+            }
             .addOnSuccessListener { result ->
-                CoroutineScope(Dispatchers.Main).launch {
-                    val list = mutableListOf<FitnessCategory>()
-                    val deferredList = result.data?.map { entry ->
-                        async {
-                            val imageResource = getImage("fitness_program/${entry.key}.jpg")
-                            FitnessCategory(name = entry.key, imageResource = imageResource)
-                        }
-                    }
-                    deferredList?.let {
-                        list.addAll(it.awaitAll())
-                    }
-                    list.forEach {
-                        Log.d("Firebase", "fetchDataFromFirebase: ${it.name} ${it.imageResource}")
-                    }
-                    trySend(list)
+                result.documents.forEach {
+                    Log.d("Firebase", "fetchDataFromFirebase: ${it["name"]}")
                 }
             }
             .addOnFailureListener {
-                cancel(CancellationException())
+
             }
-        awaitClose { close()}
-    }
-
-/*    private suspend fun collectListOfImages(result: DocumentSnapshot) : List<FitnessProgram> {
-
-        return list
+        return emptyList()
     }*/
+
+
+
 }

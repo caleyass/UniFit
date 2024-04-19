@@ -15,7 +15,6 @@
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginLeft="@dimen/margin_10"/>
 
-
     <include
         android:id="@+id/choose_your_program"
         layout="@layout/custom_layout_fitness_program"
@@ -24,10 +23,18 @@
         android:layout_marginVertical="@dimen/padding_fitness_program_card"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
 
 </LinearLayout>
 </layout>

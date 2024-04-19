@@ -2,7 +2,7 @@ package com.unifit.unifit.data.remote.dto
 
 import android.net.Uri
 
-data class FitnessCategory(
+data class FitnessCategoryDto(
     val name: String,
-    val imageResource: Uri?
+    val imageUri: Uri?
 )

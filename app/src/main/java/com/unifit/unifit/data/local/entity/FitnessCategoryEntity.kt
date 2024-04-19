@@ -1,16 +1,13 @@
 package com.unifit.unifit.data.local.entity
 
-import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "fitness_program")
-data class FitnessProgram (
+@Entity(tableName = "fitness_category")
+data class FitnessCategoryEntity (
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-
-    @ColumnInfo(name = "name")
     var name: String,
-
+    var imageUri:String?
 )
