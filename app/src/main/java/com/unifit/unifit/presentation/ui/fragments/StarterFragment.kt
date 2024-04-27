@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.unifit.unifit.databinding.FragmentStarterBinding
-
+//TODO ADD TABBAR WITH 4 ICONS
 class StarterFragment : Fragment() {
     private var binding : FragmentStarterBinding? = null
 

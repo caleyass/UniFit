@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_fitness"
-    tools:context=".presentation.ui.fragments.FitnessProgramFragment"
+    tools:context=".presentation.ui.fragments.fitness.FitnessProgramFragment"
     android:orientation="vertical">
 
     <com.unifit.unifit.presentation.ui.customs.BackButtonView

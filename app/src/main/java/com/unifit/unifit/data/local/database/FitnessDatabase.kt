@@ -5,11 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.unifit.unifit.data.local.dao.FitnessCategoryDao
+import com.unifit.unifit.data.local.dao.FitnessExercisesDao
 import com.unifit.unifit.data.local.entity.FitnessCategoryEntity
+import com.unifit.unifit.data.local.entity.FitnessExercisesEntity
 
-@Database(entities = [FitnessCategoryEntity::class], version = 1, exportSchema = false)
+@Database(entities = [FitnessCategoryEntity::class, FitnessExercisesEntity::class], version = 1, exportSchema = false)
 abstract class FitnessDatabase : RoomDatabase() {
-    abstract val dao : FitnessCategoryDao
+    abstract val fitnessExercisesDao : FitnessExercisesDao
 
     companion object{
         @Volatile

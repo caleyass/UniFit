@@ -11,8 +11,8 @@ import com.unifit.unifit.data.remote.FirebaseApi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,14 +28,28 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+        CoroutineScope(Dispatchers.IO).launch {
+            /*firebaseApi.getFitnessProgramsWorkouts("Abdomen")
+                .get()
+                .await()
+                .map { documentSnapshot ->
+                    val d = documentSnapshot.data["Warm-up"].toString()
+                    if (d != "null") {
+                        d.substring(1, d.length - 1).split(", ").forEach {
+                            Log.d("Firebase", "ref $it")
+                            firebaseApi.getWorkoutExercises()
+                                .get()
+                                .await()
+                                .map { documentSnapshot ->
+                                    Log.d("Firebase", "${documentSnapshot.data["gif"]} ${documentSnapshot.data["time"]}")
+                                }
+                        }
 
-        /*CoroutineScope(Dispatchers.Main).launch {
-            firebaseApi.getFitnessPrograms(limit = 3)
-            delay(4000)
-            firebaseApi.getFitnessPrograms(limit = 3)
+                    }
 
-
-        }*/
+                }*/
+            firebaseApi.getFitnessProgramExercise()
+        }
 
     }
 

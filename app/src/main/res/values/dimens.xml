@@ -3,9 +3,11 @@
 
     <dimen name="padding_textview_title">16sp</dimen>
 
+    <dimen name="padding_button_plain">16sp</dimen>
 
     <dimen name="padding_fitness_program_card">30dp</dimen>
 
     <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
 
 </resources>

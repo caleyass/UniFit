@@ -1,24 +1,32 @@
 package com.unifit.unifit.data.repository
 
+import android.net.Uri
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
 import com.unifit.unifit.data.local.APP_CONSTANTS
+import com.unifit.unifit.data.local.dao.FitnessExercisesDao
 import com.unifit.unifit.data.mappers.toFitnessCategory
 import com.unifit.unifit.data.mappers.toFitnessWorkout
 import com.unifit.unifit.data.remote.FirebaseApi
-import com.unifit.unifit.data.remote.FitnessPagingSource
-import com.unifit.unifit.di.AppModule
+import com.unifit.unifit.data.remote.paging.FitnessPagingSource
+import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.domain.data.FitnessCategory
+import com.unifit.unifit.domain.data.FitnessExercise
 import com.unifit.unifit.domain.data.FitnessWorkout
 import com.unifit.unifit.domain.repositories.FitnessRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class FitnessRepositoryImpl @Inject constructor(
     private val firebaseApi: FirebaseApi,
+    private val fitnessExercisesDao: FitnessExercisesDao
 ) : FitnessRepository {
 
     override fun getFitnessProgramWorkouts(categoryName : String): Flow<PagingData<FitnessWorkout>> {
@@ -46,5 +54,76 @@ class FitnessRepositoryImpl @Inject constructor(
             }
         ).flow
     }
+
+    override suspend fun getFitnessProgramExercise(
+        category: String,
+        nameOfWorkoutPart: String,
+        index: Int
+    ): Flow<FitnessExercise?> = flow {
+        firebaseApi.getFitnessProgramExercise()
+            .get()
+            .await()
+            .forEach { documentSnapshot ->
+                val name = documentSnapshot.getString("name") ?: ""
+                val gifUri = Uri.parse(documentSnapshot.getString("gif"))
+                val time = documentSnapshot.getLong("time") ?: 0
+                Log.d("Firebase", "$name $gifUri $time")
+                val fitnessExercise = FitnessExercise( gifUri, name, time)
+                emit(fitnessExercise)
+            }
+    }.catch { e ->
+        Log.e("Firebase", "Error getting document: ", e)
+    }
+    //TODO ADD HERE FLOW OR SMTH ELSE
+    /*override suspend fun getFitnessProgramExercise(
+        category: String,
+        nameOfWorkoutPart: String,
+        index:Int
+    ): FitnessExercise? {
+        var fitnessExercise: FitnessExercise ? = null
+        try {
+            firebaseApi.getFitnessProgramExercise()
+                .get()
+                .await()
+                .map { documentSnapshot ->
+                    Log.d(
+                        "Firebase",
+                        "${documentSnapshot.data["name"]} ${documentSnapshot.data["gif"]}"
+                    )
+                    fitnessExercise = FitnessExercise(
+                        name = documentSnapshot.data["name"].toString(),
+                        gif = Uri.parse(documentSnapshot.data["gif"].toString()),
+                        time = documentSnapshot.data["time"].toString().toLong()
+                    )
+
+                    return@map
+                    //TODO ADD TO DATABASE FITNESS EXERCISE
+                }
+        }
+        catch(e: Exception){
+            Log.d("Firebase", "Error getting document: ", e)
+        }
+        return fitnessExercise
+
+    }*/
+
+//        return networkBoundResource(
+//            query = {
+//                fitnessExercisesDao.getExercises(category, nameOfWorkoutPart).first()
+//            },
+//            fetch = {
+//                firebaseApi.getWorkoutExercisesByWorkout(category, nameOfWorkoutPart)
+//            },
+//            saveFetchResult = { exercises ->
+//                val fitnessEntity = FitnessExercisesEntity()
+//                fitnessEntity.exercisesQueries = exercises
+//                fitnessEntity.category = category
+//                fitnessEntity.part = nameOfWorkoutPart
+//                fitnessExercisesDao.upsertExercises(fitnessEntity)
+//            }
+//        )
+        //firebaseApi.getWorkoutExercisesByWorkout(category, nameOfWorkoutPart)
+
+//    }
 
 }

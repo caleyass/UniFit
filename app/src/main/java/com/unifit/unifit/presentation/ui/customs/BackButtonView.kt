@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.unifit.unifit.R
 import android.view.ViewGroup.MarginLayoutParams
+import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper.updatePaddingToStatusBarInsets
 
 class BackButtonView @JvmOverloads constructor(
     context: Context,
@@ -18,7 +19,7 @@ class BackButtonView @JvmOverloads constructor(
         // Set the image resource
         setImageResource(R.drawable.baseline_arrow_back_ios_24)
 
-
+        updatePaddingToStatusBarInsets(this)
 
         // Set the content description
         contentDescription = resources.getString(R.string.back_button_description)

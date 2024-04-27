@@ -18,6 +18,5 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
-        println(firebaseApi.getImage("fitness_program/arm_program.jpg"))
     }
 }

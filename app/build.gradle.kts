@@ -93,6 +93,10 @@ dependencies {
     //Paging
     implementation("androidx.paging:paging-runtime-ktx:3.3.0-beta01")
     implementation("androidx.room:room-paging:2.5.1")
+
+    //Gifs
+    implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
+
 }
 kapt {
     correctErrorTypes = true

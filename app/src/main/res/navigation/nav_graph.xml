@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fitnessFragment">
+    app:startDestination="@id/fitnessExercisesFragment">
 
     <fragment
         android:id="@+id/fitnessFragment"
-        android:name="com.unifit.unifit.presentation.ui.fragments.FitnessFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.fitness.FitnessFragment"
         android:label="fragment_fitness"
         tools:layout="@layout/fragment_fitness" >
         <action
@@ -17,12 +17,15 @@
     </fragment>
     <fragment
         android:id="@+id/fitnessProgramFragment"
-        android:name="com.unifit.unifit.presentation.ui.fragments.FitnessProgramFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.fitness.FitnessProgramFragment"
         android:label="fragment_fitness_program"
         tools:layout="@layout/fragment_fitness_program" >
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fitnessProgramFragment_to_fitnessWorkoutFragment"
+            app:destination="@id/fitnessWorkoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/starterFragment"
@@ -33,4 +36,22 @@
             android:id="@+id/action_starterFragment_to_fitnessFragment"
             app:destination="@id/fitnessFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/fitnessWorkoutFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.fitness.FitnessWorkoutFragment"
+        android:label="FitnessWorkoutFragment"
+        tools:layout="@layout/fragment_fitness_workout">
+
+        <argument android:name="workoutName"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_fitnessWorkoutFragment_to_fitnessExercisesFragment"
+            app:destination="@id/fitnessExercisesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fitnessExercisesFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.fitness.FitnessExerciseFragment"
+        android:label="FitnessExercisesFragment"
+        tools:layout="@layout/fragment_fitness_exercise"
+    />
 </navigation>

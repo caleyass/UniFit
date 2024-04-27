@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_fitness"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.fragments.fitness.FitnessExerciseFragment"
+    >
+    <com.unifit.unifit.presentation.ui.customs.BackButtonView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"/>
+
+    <!--<ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+-->
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginVertical="@dimen/margin_10"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/tvExerciseName"
+        tools:text="Exercise name"
+        style="@style/TextViewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/transparant_white"
+        />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:text="15:00"
+        android:textSize="50sp"
+        style="@style/TextViewTitle"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textAlignment="center"/>
+
+
+</LinearLayout>
+</layout>
