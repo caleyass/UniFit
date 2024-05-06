@@ -1,4 +1,4 @@
-package com.unifit.unifit.presentation.viewmodel
+package com.unifit.unifit.presentation.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -11,7 +11,6 @@ import com.unifit.unifit.domain.usecases.GetFitnessProgramWorkoutsUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 
 class FitnessWorkoutViewModel @AssistedInject constructor(

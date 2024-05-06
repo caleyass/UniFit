@@ -72,6 +72,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    //CardView
+    implementation("androidx.cardview:cardview:1.0.0")
+
     //Dagger - Hilt
     val hilt_version = "2.51.1"
 
@@ -96,6 +99,10 @@ dependencies {
 
     //Gifs
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
+
+
+    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+
 
 }
 kapt {

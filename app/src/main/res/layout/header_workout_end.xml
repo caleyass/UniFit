@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_10">
+
+    <ImageView
+        android:id="@+id/ivHandsClap"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/hands_clap"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        style="@style/TextViewPlainBald"
+        android:id="@+id/tvCongratulations"
+        android:text="@string/congratulations"
+        android:layout_below="@id/ivHandsClap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/llExercisesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCongratulations"
+        android:orientation="vertical"
+
+        >
+    <TextView
+        android:id="@+id/tvExercisesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="8"
+        style="@style/TextViewPlain"
+        android:layout_alignParentLeft="true"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_below="@id/tvExercisesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextViewPlainSmall"
+        android:text="Exercises"
+        android:layout_gravity="center"
+       />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llKCalBurned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCongratulations"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:id="@+id/tvKCalNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="0.0"
+            style="@style/TextViewPlain"
+            android:layout_alignParentLeft="true"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_below="@id/tvExercisesNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kcal"
+            android:layout_gravity="center"
+            style="@style/TextViewPlainSmall"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCongratulations"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        >
+        <TextView
+            android:id="@+id/tvDurationNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="00:02"
+            style="@style/TextViewPlain"
+            android:layout_alignParentLeft="true"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_below="@id/tvExercisesNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duration"
+            android:layout_gravity="center"
+            style="@style/TextViewPlainSmall"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:text="Restart"
+        android:layout_below="@id/llKCalBurned"
+        android:layout_centerHorizontal="true"
+        style="@style/ButtonPlainSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

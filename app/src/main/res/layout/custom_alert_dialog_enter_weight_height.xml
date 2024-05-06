@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/shape">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weight"
+        style="@style/TextViewTitle2"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:id="@+id/etWeight"
+        android:hint="@string/enter_weight"
+        android:textColorHint="@color/black"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        style="@style/TextViewPlain"
+        android:layout_gravity="center_horizontal"
+        android:inputType="numberSigned"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/height"
+        style="@style/TextViewTitle2"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:id="@+id/etHeight"
+        android:hint="@string/enter_height"
+        android:textColorHint="@color/black"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        style="@style/TextViewPlain"
+        android:layout_gravity="center_horizontal"
+        android:inputType="numberSigned"/>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10"
+        style="@style/ButtonPlainSmall"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

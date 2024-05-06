@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/transparant_white"
+        android:background="@color/transparent_white"
         />
 
     <TextView
@@ -52,7 +52,6 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:textAlignment="center"/>
-
 
 </LinearLayout>
 </layout>

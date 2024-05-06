@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.unifit.unifit.databinding.FragmentFitnessBinding
 import com.unifit.unifit.presentation.adapter.FitnessCategoryAdapter
-import com.unifit.unifit.presentation.viewmodel.FitnessCategoryViewModel
+import com.unifit.unifit.presentation.viewmodels.FitnessCategoryViewModel
+import com.unifit.unifit.presentation.viewmodels.FitnessProgramExerciseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -23,6 +25,8 @@ class FitnessFragment : Fragment() {
 
     private var binding : FragmentFitnessBinding? = null
     private val viewModel : FitnessCategoryViewModel by viewModels()
+
+    private val sharedViewModel : FitnessProgramExerciseViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +63,8 @@ class FitnessFragment : Fragment() {
 
     private fun onFitnessProgramClicked(categoryName:String) {
         Log.d("FragmentNavigation", "onFitnessProgramClicked: $categoryName")
-        val action = FitnessFragmentDirections.actionFitnessFragmentToFitnessProgramFragment(categoryName)
+        sharedViewModel.category = categoryName
+        val action = FitnessFragmentDirections.actionFitnessFragmentToFitnessProgramFragment()
         findNavController().navigate(action)
     }
 

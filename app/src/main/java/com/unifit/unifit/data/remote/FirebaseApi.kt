@@ -3,6 +3,7 @@ package com.unifit.unifit.data.remote
 
 import android.net.Uri
 import android.util.Log
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.Source
@@ -14,6 +15,9 @@ import com.unifit.unifit.data.local.APP_CONSTANTS.Companion.PAGE_SIZE
 import com.unifit.unifit.domain.data.FitnessExercise
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class FirebaseApi @Inject constructor(
     private val firestoreDatabase: FirebaseFirestore,
@@ -22,6 +26,9 @@ class FirebaseApi @Inject constructor(
     private val categoriesDocument = firestoreDatabase.collection(COLLECTION_FITNESS_PROGRAM_NAME)
         .document(DOCUMENT_FITNESS_PROGRAM_CATEGORIES_NAME)
 
+    /**
+     * Gets fitness categories of workouts
+     * */
     fun getFitnessCategories() : Query {
         return categoriesDocument
             .collection("categories")
@@ -29,18 +36,57 @@ class FirebaseApi @Inject constructor(
             .limit(PAGE_SIZE.toLong())
 
     }
-
+    /**
+     * Gets fitness program's workouts
+     * */
     fun getFitnessProgramsWorkouts(categoryName:String) : Query{
         return categoriesDocument
             .collection(categoryName)
             .orderBy(NAME_FIELD)
             .limit(PAGE_SIZE.toLong())
     }
+
+    fun getFitnessProgramWorkout(categoryName:String, workoutId : String): DocumentReference {
+        return categoriesDocument
+            .collection(categoryName)
+            .document(workoutId)
+    }
     /**
-     * Gets workout exercise:
+     * Get all exercises of workout:
+     * List<Query> - each executes getWorkoutExercise
      * name
      * gif
      * time
+     * */
+    suspend fun getWorkoutExercisesQueries(
+        category:String = "Abdomen",
+        nameOfWorkout: String = "Ab Burn Circuit",
+        nameOfWorkoutPart: String = "Warm-up"
+    ) : List<Query> = suspendCoroutine { continuation ->
+        val listOfQueries = mutableListOf<Query>()
+        getFitnessProgramWorkout(category, nameOfWorkout)
+            .get(Source.CACHE)
+            .addOnSuccessListener {
+                //TODO deserealize it to list
+                val list = it.get(nameOfWorkoutPart).toString()
+                list.substring(1, list.length - 1).split(", ").forEach {
+                    val query = getWorkoutExercise(nameOfWorkoutPart, it)
+                    Log.d("Firebase", "ref ${it}")
+                    listOfQueries.add(query)
+                }
+                continuation.resume(listOfQueries)
+            }
+            .addOnFailureListener {
+                Log.d("Firebase", "Error getting documents: ", it)
+                continuation.resumeWithException(it)
+            }
+    }
+    /**
+     * Gets workout exercise in document "nameOfWorkoutPart" that contains fields:
+     * name
+     * gif
+     * time
+     * getWorkoutExercise("Warm-up", "March in place") gets the exercise "March in place" in the document "Warm-up"
      * */
     fun getWorkoutExercise(nameOfWorkoutPart: String = "Warm-up", nameOfExercise:String = "March in place"): Query {
         return firestoreDatabase.collection(COLLECTION_FITNESS_PROGRAM_NAME)
@@ -50,14 +96,8 @@ class FirebaseApi @Inject constructor(
             .orderBy(NAME_FIELD)
     }
 
-    /**
-     * Get all exercises of workout:
-     * List<Query> - each executes getWorkoutExercise
-     * name
-     * gif
-     * time
-     * */
-    suspend fun getWorkoutExercisesQueries(
+
+    /*suspend fun getWorkoutExercisesQueries(
         category:String = "Abdomen",
         nameOfWorkoutPart: String = "Warm-up"
     ) : List<Query>{
@@ -75,15 +115,17 @@ class FirebaseApi @Inject constructor(
                 }
             }
         return listOfQueries
-    }
+    }*/
 
     suspend fun getFitnessProgramExercise(
         category: String = "Abdomen",
+        nameOfWorkout: String = "Ab Burn Circuit",
         nameOfWorkoutPart: String = "Warm-up",
         index:Int = 2
     ) : Query {
         return getWorkoutExercisesQueries( // TODO ADD SEPARATE CLASS WHICH ALSO SAVES IT TO CACHE
             category = category,
+            nameOfWorkout = nameOfWorkout,
             nameOfWorkoutPart = nameOfWorkoutPart
         )[index]
     }

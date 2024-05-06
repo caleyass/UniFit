@@ -6,5 +6,12 @@
 
     <color name="green_btn_bg">#2A831B</color>
 
-    <color name="transparant_white">#99FFFFFF</color>
+    <color name="transparent_white">#99FFFFFF</color>
+
+    <color name="underweight">#FA8484</color>
+    <color name="normal_weight">#00FF00</color>
+    <color name="overweight">#FFFF00</color>
+    <color name="obese_class_i">#FFA500</color>
+    <color name="obese_class_ii">#FF0000</color>
+
 </resources>

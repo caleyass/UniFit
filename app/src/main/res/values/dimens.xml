@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="padding_textview_title">16sp</dimen>
+    <dimen name="padding_textview_title">16dp</dimen>
 
-    <dimen name="padding_button_plain">16sp</dimen>
+    <dimen name="padding_button_plain">16dp</dimen>
+    <dimen name="padding_button_small">5dp</dimen>
 
     <dimen name="padding_fitness_program_card">30dp</dimen>
 
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_20">20dp</dimen>
 
+    <dimen name="card_view_corner_radius">8dp</dimen>
 </resources>

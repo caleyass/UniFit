@@ -1,5 +1,6 @@
 package com.unifit.unifit.presentation.ui.utils
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
@@ -8,7 +9,7 @@ import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
 
 object EdgeToEdgeHelper {
-    fun updatePaddingToStatusBarInsets(view: View) {
+    fun updateMarginToStatusBarInsets(view: View) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars())
             // Apply the insets as a margin to the view. This solution sets
@@ -17,6 +18,7 @@ object EdgeToEdgeHelper {
             // if that's more appropriate.
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 topMargin = insets.top + v.marginTop
+                Log.d("TAG", "updateMarginToStatusBarInsets: $topMargin")
             }
             WindowInsetsCompat.CONSUMED
         }

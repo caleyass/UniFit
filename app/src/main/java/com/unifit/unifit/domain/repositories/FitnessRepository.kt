@@ -10,8 +10,9 @@ import kotlinx.coroutines.flow.Flow
 interface FitnessRepository {
     fun getFitnessProgramWorkouts(categoryName: String): Flow<PagingData<FitnessWorkout>>
     fun getFitnessCategories(): Flow<PagingData<FitnessCategory>>
-    suspend fun getFitnessProgramExercise(
+    fun getFitnessProgramExercise(
         category: String,
+        nameOfExercise: String,
         nameOfWorkoutPart: String,
         index: Int
     ): Flow<FitnessExercise?>

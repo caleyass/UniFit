@@ -11,8 +11,7 @@ import com.unifit.unifit.data.local.dao.FitnessExercisesDao
 import com.unifit.unifit.data.mappers.toFitnessCategory
 import com.unifit.unifit.data.mappers.toFitnessWorkout
 import com.unifit.unifit.data.remote.FirebaseApi
-import com.unifit.unifit.data.remote.paging.FitnessPagingSource
-import com.unifit.unifit.data.utils.Resource
+import com.unifit.unifit.data.remote.paging.paging_source.FitnessPagingSource
 import com.unifit.unifit.domain.data.FitnessCategory
 import com.unifit.unifit.domain.data.FitnessExercise
 import com.unifit.unifit.domain.data.FitnessWorkout
@@ -20,7 +19,6 @@ import com.unifit.unifit.domain.repositories.FitnessRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -55,12 +53,18 @@ class FitnessRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override suspend fun getFitnessProgramExercise(
+    override fun getFitnessProgramExercise(
         category: String,
+        nameOfExercise: String,
         nameOfWorkoutPart: String,
         index: Int
     ): Flow<FitnessExercise?> = flow {
-        firebaseApi.getFitnessProgramExercise()
+        firebaseApi.getFitnessProgramExercise(
+            category,
+            nameOfExercise,
+            nameOfWorkoutPart,
+            index
+        )
             .get()
             .await()
             .forEach { documentSnapshot ->

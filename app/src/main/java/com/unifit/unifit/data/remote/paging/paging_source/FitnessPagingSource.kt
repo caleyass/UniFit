@@ -1,4 +1,4 @@
-package com.unifit.unifit.data.remote.paging
+package com.unifit.unifit.data.remote.paging.paging_source
 
 import android.util.Log
 import androidx.paging.PagingSource

@@ -3,4 +3,15 @@
 
     <string name="your_program">Choose your program</string>
     <string name="back_button_description">Back</string>
+
+    <string name="congratulations">Congratulations! You have completed workout!</string>
+
+    <string name="weight">Weight</string>
+    <string name="height">Height</string>
+    <string name="enter_weight">Enter your weight (kg)</string>
+    <string name="enter_height">Enter your height (cm)</string>
+    <string name="enter_weight_height">Enter your weight and height</string>
+
+
+    <string name="save">Save</string>
 </resources>
