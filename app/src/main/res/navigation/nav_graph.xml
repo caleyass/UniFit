@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fitnessWorkoutEndFragment">
+    app:startDestination="@id/fitnessExercisesFragment">
 
     <fragment
         android:id="@+id/fitnessFragment"
@@ -73,5 +73,6 @@
     <fragment
         android:id="@+id/fitnessWorkoutEndFragment"
         android:name="com.unifit.unifit.presentation.ui.fragments.fitness.FitnessWorkoutEndFragment"
-        android:label="FitnessWorkoutEndFragment" />
+        android:label="FitnessWorkoutEndFragment"
+        tools:layout="@layout/fragment_fitness_workout_end"/>
 </navigation>

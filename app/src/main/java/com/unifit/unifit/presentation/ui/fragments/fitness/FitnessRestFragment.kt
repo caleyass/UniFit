@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.databinding.FragmentFitnessRestBinding
 import com.unifit.unifit.presentation.viewmodels.FitnessProgramExerciseViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -35,13 +36,13 @@ class FitnessRestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            sharedViewModel.getNextFitnessProgramExercise()?.collect { fitnessExercise ->
+            sharedViewModel.getCurrentFitnessProgramExercise()?.collect { fitnessExercise ->
                 withContext(Dispatchers.Main) {
-                    binding?.tvExerciseName?.text = fitnessExercise?.name
+                    binding?.tvExerciseName?.text = fitnessExercise.data?.name
                     binding?.gifImageView?.let {
                         Glide.with(requireContext())
                             .asGif()
-                            .load(fitnessExercise?.gif)
+                            .load(fitnessExercise.data?.gif)
                             .into(it)
                     }
                 }
@@ -52,6 +53,7 @@ class FitnessRestFragment : Fragment() {
             restartCountDownTimer()
         }
         binding?.btnSkip?.setOnClickListener {
+            countDownTimer?.cancel()
             val action = FitnessRestFragmentDirections.actionFitnessRestFragmentToFitnessExercisesFragment()
             findNavController().navigate(action)
         }
@@ -96,4 +98,5 @@ class FitnessRestFragment : Fragment() {
     private fun updateTimerDisplay() {
         binding?.tvTime?.text = (secondsRemaining / 1000).toString()
     }
+
 }

@@ -100,7 +100,6 @@ dependencies {
     //Gifs
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
 
-
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
 
 

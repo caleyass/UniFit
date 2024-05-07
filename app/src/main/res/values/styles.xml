@@ -42,7 +42,7 @@
     </style>
 
     <style name="ButtonPlain">
-        <item name="android:backgroundTint">@color/green_btn_bg</item>
+        <item name="android:backgroundTint">@color/green_deep</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_width">wrap_content</item>

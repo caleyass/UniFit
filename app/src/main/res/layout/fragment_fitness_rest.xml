@@ -66,7 +66,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginVertical="@dimen/margin_20"
-        android:backgroundTint="@color/green_btn_bg"
+        android:backgroundTint="@color/green_deep"
         android:text="+ 20 sec"
         android:textColor="@color/white" />
 
@@ -82,7 +82,7 @@
         android:layout_marginTop="@dimen/margin_20"
         android:layout_marginEnd="@dimen/margin_20"
         android:layout_marginBottom="@dimen/margin_20"
-        android:backgroundTint="@color/green_btn_bg"
+        android:backgroundTint="@color/green_deep"
         android:text="Skip"
         android:textColor="@color/white" />
 

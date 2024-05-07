@@ -49,6 +49,10 @@ class FitnessWorkoutEndFragment : Fragment(){
         addAlertDialog()
         binding?.appBarLayout?.let { EdgeToEdgeHelper.updateMarginToStatusBarInsets(it) }
 
+        binding?.header?.findViewById<TextView>(R.id.tvExercisesNumber)?.text = sharedViewModel.index.toString()
+        binding?.header?.findViewById<TextView>(R.id.tvDurationNumber)?.text = sharedViewModel.getTimeFormatted()
+        binding?.header?.findViewById<TextView>(R.id.tvKCalNumber)?.text = sharedViewModel.getKCalFormatted(fitnessWorkoutEndViewModel.weight.value ?: 70)
+
     }
 
     private fun addAlertDialog(){
@@ -94,7 +98,7 @@ class FitnessWorkoutEndFragment : Fragment(){
     private fun observeBMI(){
         fitnessWorkoutEndViewModel.bmi.observe(viewLifecycleOwner) {
             it?.let{
-                nestedScrollView?.findViewById<TextView>(R.id.tvBMIValue)?.text = convertBMItoString(it)
+                nestedScrollView?.findViewById<TextView>(R.id.tvBMIValue)?.text = fitnessWorkoutEndViewModel.getBMIinString()
                 progressBar?.progress = it.toInt()
                 fitnessWorkoutEndViewModel.getColourOfProgressBar()?.let { color ->
                     progressBar?.progressTintList = ColorStateList.valueOf(ContextCompat.getColor(this.requireContext(), color))
@@ -106,11 +110,6 @@ class FitnessWorkoutEndFragment : Fragment(){
         }
 
     }
-
-    private fun convertBMItoString(bmiFloat : Float) : String{
-        return String.format("%.1f", bmiFloat)
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

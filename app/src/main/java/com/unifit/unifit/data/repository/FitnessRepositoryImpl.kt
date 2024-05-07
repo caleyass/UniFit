@@ -12,6 +12,7 @@ import com.unifit.unifit.data.mappers.toFitnessCategory
 import com.unifit.unifit.data.mappers.toFitnessWorkout
 import com.unifit.unifit.data.remote.FirebaseApi
 import com.unifit.unifit.data.remote.paging.paging_source.FitnessPagingSource
+import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.domain.data.FitnessCategory
 import com.unifit.unifit.domain.data.FitnessExercise
 import com.unifit.unifit.domain.data.FitnessWorkout
@@ -58,25 +59,28 @@ class FitnessRepositoryImpl @Inject constructor(
         nameOfExercise: String,
         nameOfWorkoutPart: String,
         index: Int
-    ): Flow<FitnessExercise?> = flow {
-        firebaseApi.getFitnessProgramExercise(
-            category,
-            nameOfExercise,
-            nameOfWorkoutPart,
-            index
-        )
-            .get()
-            .await()
-            .forEach { documentSnapshot ->
-                val name = documentSnapshot.getString("name") ?: ""
-                val gifUri = Uri.parse(documentSnapshot.getString("gif"))
-                val time = documentSnapshot.getLong("time") ?: 0
-                Log.d("Firebase", "$name $gifUri $time")
-                val fitnessExercise = FitnessExercise( gifUri, name, time)
-                emit(fitnessExercise)
-            }
-    }.catch { e ->
-        Log.e("Firebase", "Error getting document: ", e)
+    ): Flow<Resource<FitnessExercise>> = flow {
+        try {
+            firebaseApi.getFitnessProgramExercise(
+                category,
+                nameOfExercise,
+                nameOfWorkoutPart,
+                index
+            )
+                .get()
+                .await()
+                .forEach { documentSnapshot ->
+                    val name = documentSnapshot.getString("name") ?: ""
+                    val gifUri = Uri.parse(documentSnapshot.getString("gif"))
+                    val time = documentSnapshot.getLong("time") ?: 0
+                    Log.d("Firebase", "$name $gifUri $time")
+                    val fitnessExercise = FitnessExercise(gifUri, name, time)
+                    emit(Resource.Success(fitnessExercise))
+                }
+        } catch (e: Exception) {
+            Log.e("Firebase", "Error getting document: ", e)
+            emit(Resource.Error(throwable = e))
+        }
     }
     //TODO ADD HERE FLOW OR SMTH ELSE
     /*override suspend fun getFitnessProgramExercise(

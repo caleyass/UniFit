@@ -68,6 +68,10 @@ class FitnessWorkoutEndViewModel(private val sharedPreferences: SharedPreference
         return null
     }
 
+    fun getBMIinString() : String{
+        return String.format("%.1f", bmi.value)
+    }
+
     override fun onCleared() {
         super.onCleared()
         with(sharedPreferences.edit()) {

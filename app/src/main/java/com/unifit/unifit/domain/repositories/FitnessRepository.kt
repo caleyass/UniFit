@@ -2,6 +2,7 @@ package com.unifit.unifit.domain.repositories
 
 import androidx.paging.PagingData
 import com.unifit.unifit.data.remote.dto.FitnessCategoryDto
+import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.domain.data.FitnessCategory
 import com.unifit.unifit.domain.data.FitnessExercise
 import com.unifit.unifit.domain.data.FitnessWorkout
@@ -15,5 +16,5 @@ interface FitnessRepository {
         nameOfExercise: String,
         nameOfWorkoutPart: String,
         index: Int
-    ): Flow<FitnessExercise?>
+    ): Flow<Resource<FitnessExercise>>
 }

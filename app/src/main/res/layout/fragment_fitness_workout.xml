@@ -36,7 +36,7 @@
         style="@style/ButtonPlain"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
-        android:backgroundTint="@color/green_btn_bg"/>
+        android:backgroundTint="@color/green_deep"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

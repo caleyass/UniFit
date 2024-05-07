@@ -4,7 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#B5B5B5</color>
 
-    <color name="green_btn_bg">#2A831B</color>
+    <color name="green_deep">#2A831B</color>
+    <color name="green_light">#9E8EF87D</color>
 
     <color name="transparent_white">#99FFFFFF</color>
 

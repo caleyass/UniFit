@@ -123,10 +123,22 @@ class FirebaseApi @Inject constructor(
         nameOfWorkoutPart: String = "Warm-up",
         index:Int = 2
     ) : Query {
-        return getWorkoutExercisesQueries( // TODO ADD SEPARATE CLASS WHICH ALSO SAVES IT TO CACHE
+        return getWorkoutExercisesQueries(
             category = category,
             nameOfWorkout = nameOfWorkout,
             nameOfWorkoutPart = nameOfWorkoutPart
         )[index]
+    }
+
+    suspend fun getFitnessProgramExercises(
+        category: String = "Abdomen",
+        nameOfWorkout: String = "Ab Burn Circuit",
+        nameOfWorkoutPart: String = "Warm-up"
+    ) : List<Query> {
+        return getWorkoutExercisesQueries(
+            category = category,
+            nameOfWorkout = nameOfWorkout,
+            nameOfWorkoutPart = nameOfWorkoutPart
+        )
     }
 }

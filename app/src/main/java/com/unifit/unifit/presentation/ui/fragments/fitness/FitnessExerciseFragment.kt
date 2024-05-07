@@ -10,13 +10,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.databinding.FragmentFitnessExerciseBinding
+import com.unifit.unifit.presentation.ui.customs.ProgressDrawable
 import com.unifit.unifit.presentation.viewmodels.FitnessProgramExerciseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 @AndroidEntryPoint
 class FitnessExerciseFragment : Fragment() {
@@ -39,13 +44,21 @@ class FitnessExerciseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel.nameOfWorkoutPart = "Warm-up"
+        val progressDrawable = ProgressDrawable(sharedViewModel.index, this.requireContext())
+        binding?.progressBar?.progressDrawable = progressDrawable
         CoroutineScope(Dispatchers.IO).launch {
             bindFitnessExerciseToUI()
-            try {
-                sharedViewModel.getNextFitnessProgramExercise()
-            } catch (e: IndexOutOfBoundsException) {
-                Log.e("TAG", "IndexOutOfBoundsException")
-                end = true
+            sharedViewModel.getNextFitnessProgramExercise()?.collect { resource ->
+                when(resource){
+                    is Resource.Error -> {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            end = true
+                        }
+                    }
+                    else -> {
+
+                    }
+                }
             }
         }
     }
@@ -56,11 +69,11 @@ class FitnessExerciseFragment : Fragment() {
                 binding?.gifImageView?.let {
                     Glide.with(requireContext())
                         .asGif()
-                        .load(fitnessExercise?.gif)
+                        .load(fitnessExercise.data?.gif)
                         .into(it)
                 }
-                binding?.tvExerciseName?.text = fitnessExercise?.name
-                bindCountDownTimer(fitnessExercise?.time.toString().toLong()  * 1000)
+                binding?.tvExerciseName?.text = fitnessExercise.data?.name
+                bindCountDownTimer(fitnessExercise.data?.time.toString().toLong()  * 1000)
             }
         }
     }
@@ -72,10 +85,15 @@ class FitnessExerciseFragment : Fragment() {
         ) {
             override fun onTick(millisUntilFinished: Long) {
                 binding?.tvTime?.text = (millisUntilFinished / 1000).toString()
+                sharedViewModel.workoutTime++
+                Log.d("TAG", "onTick: ${sharedViewModel.workoutTime}T")
             }
 
             override fun onFinish() {
-
+                if(end)
+                    navigateToEnd()
+                else
+                    navigateToRest()
             }
         }.start()
     }
@@ -86,7 +104,7 @@ class FitnessExerciseFragment : Fragment() {
     }
 
     private fun navigateToEnd(){
-        val action = FitnessExerciseFragmentDirections.actionFitnessExercisesFragmentToFitnessRestFragment()
+        val action = FitnessExerciseFragmentDirections.actionFitnessExercisesFragmentToFitnessWorkoutEndFragment()
         findNavController().navigate(action)
     }
 
