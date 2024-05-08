@@ -90,7 +90,6 @@ class FitnessRestFragment : Fragment() {
 
             override fun onFinish() {
                 goToNextExercise()
-
             }
         }.start()
     }

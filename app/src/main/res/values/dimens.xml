@@ -12,4 +12,8 @@
     <dimen name="margin_20">20dp</dimen>
 
     <dimen name="card_view_corner_radius">8dp</dimen>
+    
+    <dimen name="text_size_title">26sp</dimen>
+    <dimen name="text_size_title2">20sp</dimen>
+
 </resources>

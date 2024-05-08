@@ -46,9 +46,14 @@ android {
 dependencies {
 
     implementation("androidx.fragment:fragment:1.6.2")
+
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-firestore:24.11.0")
-    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("com.google.firebase:firebase-storage:21.0.0")
     implementation("androidx.paging:paging-common-android:3.3.0-beta01")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
+
     //Navigation
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -101,6 +106,7 @@ dependencies {
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
 
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+
 
 
 }

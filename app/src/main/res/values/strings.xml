@@ -14,4 +14,12 @@
 
 
     <string name="save">Save</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <string name="signup">Sign up</string> <!-- Register button -->
+    <string name="login">Log in</string> <!-- Login button -->
+
+    <string name="web_client_id">1035713250501-dat93ssictnt7t6l0rnugcn3vgbuf39m.apps.googleusercontent.com</string>
 </resources>

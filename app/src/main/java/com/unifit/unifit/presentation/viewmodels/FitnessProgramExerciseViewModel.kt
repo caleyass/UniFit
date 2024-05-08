@@ -20,6 +20,8 @@ class FitnessProgramExerciseViewModel @Inject constructor(
 ) : ViewModel() {
     var indexExercise: Int = 0
     var indexPart: Int = 0
+    var counter: Int = 0
+
     val workoutParts = arrayListOf<String>("Warm-up", "Main", "Cool down")
 
     var category: String? = "Abdomen"
@@ -30,6 +32,7 @@ class FitnessProgramExerciseViewModel @Inject constructor(
 
     var fitnessExercise : Flow<Resource<FitnessExercise>>? = null
     var fitnessExercises: List<FitnessExercise>? = null
+
 
     private val kCalPerMinute : Float = 5.0F
 
@@ -87,6 +90,7 @@ class FitnessProgramExerciseViewModel @Inject constructor(
         Log.d("TAG", "getCurrentFitnessProgramExercise: ${fitnessExercises?.size}")
         if(increment) {
             indexExercise++
+            counter++
         }
         return fitnessExercise
     }

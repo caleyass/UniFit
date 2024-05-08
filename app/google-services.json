@@ -12,7 +12,20 @@
           "package_name": "com.unifit.unifit"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1035713250501-5rvq3s6de4e1g1fh7m1qdtdl9705re8c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unifit.unifit",
+            "certificate_hash": "6a5728c3b280d10a033871654154eef015bb89d8"
+          }
+        },
+        {
+          "client_id": "1035713250501-dat93ssictnt7t6l0rnugcn3vgbuf39m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD7VFN3HXVNz8pULJoJcb8DAcwHM9E49xA"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035713250501-dat93ssictnt7t6l0rnugcn3vgbuf39m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

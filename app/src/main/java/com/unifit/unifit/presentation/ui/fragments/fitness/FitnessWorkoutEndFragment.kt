@@ -48,7 +48,7 @@ class FitnessWorkoutEndFragment : Fragment(){
         addAlertDialog()
         binding?.appBarLayout?.let { EdgeToEdgeHelper.updateMarginToStatusBarInsets(it) }
 
-        binding?.header?.findViewById<TextView>(R.id.tvExercisesNumber)?.text = sharedViewModel.indexExercise.toString()
+        binding?.header?.findViewById<TextView>(R.id.tvExercisesNumber)?.text = sharedViewModel.counter.toString()
         binding?.header?.findViewById<TextView>(R.id.tvDurationNumber)?.text = sharedViewModel.getTimeFormatted()
         binding?.header?.findViewById<TextView>(R.id.tvKCalNumber)?.text = sharedViewModel.getKCalFormatted(fitnessWorkoutEndViewModel.weight.value ?: 70)
 
