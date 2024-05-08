@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".presentation.ui.fragments.fitness.FitnessExerciseFragment"
     >
+
     <com.unifit.unifit.presentation.ui.customs.BackButtonView
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -15,10 +16,9 @@
         android:layout_marginTop="@dimen/margin_10"
         android:layout_marginLeft="@dimen/margin_10"/>
 
-    <!--<ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
--->
+    
+
+
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
         android:layout_width="match_parent"

@@ -15,6 +15,7 @@ import com.unifit.unifit.data.remote.paging.paging_source.FitnessPagingSource
 import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.domain.data.FitnessCategory
 import com.unifit.unifit.domain.data.FitnessExercise
+import com.unifit.unifit.domain.data.FitnessProgramExercises
 import com.unifit.unifit.domain.data.FitnessWorkout
 import com.unifit.unifit.domain.repositories.FitnessRepository
 import kotlinx.coroutines.flow.Flow
@@ -82,7 +83,38 @@ class FitnessRepositoryImpl @Inject constructor(
             emit(Resource.Error(throwable = e))
         }
     }
-    //TODO ADD HERE FLOW OR SMTH ELSE
+
+    override fun getFitnessProgramExercises(
+        category: String,
+        nameOfWorkout: String,
+        nameOfWorkoutPart: String
+    ): Flow<Resource<List<FitnessExercise>>> = flow {
+        try {
+            val listFitnessExercises = mutableListOf<FitnessExercise>()
+            firebaseApi.getFitnessProgramExercises(
+                category,
+                nameOfWorkout,
+                nameOfWorkoutPart
+            )
+            .forEach {
+                it
+                .get()
+                .await()
+                .map { documentSnapshot ->
+                    val name = documentSnapshot.getString("name") ?: ""
+                    val gifUri = Uri.parse(documentSnapshot.getString("gif"))
+                    val time = documentSnapshot.getLong("time") ?: 0
+                    Log.d("Firebase", "fitness exercises $name $gifUri $time")
+                    listFitnessExercises.add(FitnessExercise(gifUri, name, time))
+                }
+            }
+            emit(Resource.Success(listFitnessExercises))
+        } catch (e: Exception) {
+            Log.e("Firebase", "Error getting document: ", e)
+            emit(Resource.Error(throwable = e))
+        }
+    }
+
     /*override suspend fun getFitnessProgramExercise(
         category: String,
         nameOfWorkoutPart: String,

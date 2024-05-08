@@ -1,44 +1,118 @@
 package com.unifit.unifit.presentation.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.domain.data.FitnessExercise
+import com.unifit.unifit.domain.data.FitnessWorkoutPart
 import com.unifit.unifit.domain.usecases.GetFitnessProgramExerciseUseCase
+import com.unifit.unifit.domain.usecases.GetFitnessProgramExercisesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
 class FitnessProgramExerciseViewModel @Inject constructor(
-    private val getFitnessProgramExerciseUseCase: GetFitnessProgramExerciseUseCase
+    private val getFitnessProgramExerciseUseCase: GetFitnessProgramExerciseUseCase,
+    private val getFitnessProgramExercisesUseCase: GetFitnessProgramExercisesUseCase
 ) : ViewModel() {
+    var indexExercise: Int = 0
+    var indexPart: Int = 0
+    val workoutParts = arrayListOf<String>("Warm-up", "Main", "Cool down")
+
     var category: String? = "Abdomen"
     var nameOfWorkout: String? = "Ab Burn Circuit"
-    var nameOfWorkoutPart: String? = null
-
-    var index: Int = 0
+    var nameOfWorkoutPart: String? = workoutParts[indexPart]
 
     var workoutTime : Long = 0
 
     var fitnessExercise : Flow<Resource<FitnessExercise>>? = null
+    var fitnessExercises: List<FitnessExercise>? = null
 
     private val kCalPerMinute : Float = 5.0F
 
     fun getNextFitnessProgramExercise(): Flow<Resource<FitnessExercise>>? {
-        if (category != null && nameOfWorkout != null && nameOfWorkoutPart != null) {
+        if (checkParametersInitialized()) {
             fitnessExercise = getFitnessProgramExerciseUseCase.execute(
                 category!!,
                 nameOfWorkout!!,
                 nameOfWorkoutPart!!,
-                ++index
+                ++indexExercise
             )
+
             return fitnessExercise
         }
         return null
     }
 
+    suspend fun updateFitnessProgramExercises() : List<FitnessExercise>? {
+        fitnessExercises = null
+        indexExercise = 0
+        nameOfWorkoutPart = workoutParts[indexPart]
+        fitnessExercises = viewModelScope.async { getFitnessProgramExercises()}.await()
+        return fitnessExercises
+    }
+
+    suspend fun getFitnessProgramExercises() : List<FitnessExercise>?{
+        if(fitnessExercises == null && checkParametersInitialized()) {
+            viewModelScope.async {
+                getFitnessProgramExercisesUseCase.execute(
+                    category!!,
+                    nameOfWorkout!!,
+                    nameOfWorkoutPart!!
+                ).collect { resource ->
+                    when (resource) {
+                        is Resource.Error -> {
+                            return@collect
+                        }
+                        else -> {
+                            Log.d("TAG", "getFitnessProgramExercises: ${resource.data?.size}")
+                            resource.data?.let {
+                                fitnessExercises = it
+                            }
+                            indexPart++
+                        }
+                    }
+                }
+            }.await()
+        }
+        return fitnessExercises
+    }
+
+    fun getCurrentFitnessProgramExercise(increment:Boolean = true) : FitnessExercise?{
+        val fitnessExercise : FitnessExercise? = fitnessExercises?.getOrNull(indexExercise)
+        Log.d("TAG", "getCurrentFitnessProgramExercise: $indexExercise ${fitnessExercise?.name}")
+        Log.d("TAG", "getCurrentFitnessProgramExercise: ${fitnessExercises?.size}")
+        if(increment) {
+            indexExercise++
+        }
+        return fitnessExercise
+    }
+
+    fun isLastExercise() : Boolean {
+        if(indexExercise == fitnessExercises?.size?.minus(1)) {
+            return true
+        }
+        return false
+    }
+
+    fun isLastPart() : Boolean {
+        return indexPart == FitnessWorkoutPart.values().size - 1
+    }
+
+    suspend fun updateWorkoutPart(){
+        nameOfWorkoutPart = workoutParts[indexPart]
+        indexExercise = 0
+        viewModelScope.launch {
+            updateFitnessProgramExercises()
+        }.join()
+    }
 
 
-    fun getCurrentFitnessProgramExercise(): Flow<Resource<FitnessExercise>>? {
+
+    /*fun getCurrentFitnessProgramExercise(): Flow<Resource<FitnessExercise>>? {
         if (category != null && nameOfWorkout != null && nameOfWorkoutPart != null) {
             if(fitnessExercise == null) {
                 fitnessExercise = getFitnessProgramExerciseUseCase.execute(
@@ -51,6 +125,10 @@ class FitnessProgramExerciseViewModel @Inject constructor(
             return fitnessExercise
         }
         return null
+    }*/
+
+    private fun checkParametersInitialized() : Boolean {
+        return category != null && nameOfWorkout != null && nameOfWorkoutPart != null
     }
 
     private fun getKCal(weight:Int) : Float {

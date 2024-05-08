@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -49,7 +48,7 @@ class FitnessWorkoutEndFragment : Fragment(){
         addAlertDialog()
         binding?.appBarLayout?.let { EdgeToEdgeHelper.updateMarginToStatusBarInsets(it) }
 
-        binding?.header?.findViewById<TextView>(R.id.tvExercisesNumber)?.text = sharedViewModel.index.toString()
+        binding?.header?.findViewById<TextView>(R.id.tvExercisesNumber)?.text = sharedViewModel.indexExercise.toString()
         binding?.header?.findViewById<TextView>(R.id.tvDurationNumber)?.text = sharedViewModel.getTimeFormatted()
         binding?.header?.findViewById<TextView>(R.id.tvKCalNumber)?.text = sharedViewModel.getKCalFormatted(fitnessWorkoutEndViewModel.weight.value ?: 70)
 

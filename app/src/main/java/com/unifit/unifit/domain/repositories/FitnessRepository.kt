@@ -17,4 +17,10 @@ interface FitnessRepository {
         nameOfWorkoutPart: String,
         index: Int
     ): Flow<Resource<FitnessExercise>>
+
+    fun getFitnessProgramExercises(
+        category: String,
+        nameOfWorkout: String,
+        nameOfWorkoutPart: String
+    ): Flow<Resource<List<FitnessExercise>>>
 }

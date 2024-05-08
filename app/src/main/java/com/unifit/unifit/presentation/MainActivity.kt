@@ -8,9 +8,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.unifit.unifit.R
 import com.unifit.unifit.data.remote.FirebaseApi
+import com.unifit.unifit.data.repository.FitnessRepositoryImpl
+import com.unifit.unifit.domain.repositories.FitnessRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -19,7 +22,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     @Inject lateinit var firebaseApi: FirebaseApi
-
+    @Inject lateinit var fitnessRepositoryImpl: FitnessRepositoryImpl
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -28,28 +31,15 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        CoroutineScope(Dispatchers.IO).launch {
-            /*firebaseApi.getFitnessProgramsWorkouts("Abdomen")
-                .get()
-                .await()
-                .map { documentSnapshot ->
-                    val d = documentSnapshot.data["Warm-up"].toString()
-                    if (d != "null") {
-                        d.substring(1, d.length - 1).split(", ").forEach {
-                            Log.d("Firebase", "ref $it")
-                            firebaseApi.getWorkoutExercises()
-                                .get()
-                                .await()
-                                .map { documentSnapshot ->
-                                    Log.d("Firebase", "${documentSnapshot.data["gif"]} ${documentSnapshot.data["time"]}")
-                                }
-                        }
-
+        /*CoroutineScope(Dispatchers.IO).launch {
+            fitnessRepositoryImpl.getFitnessProgramExercises("Abdomen", "Ab Burn Circuit", "Main")
+                .collect{
+                    it.data?.forEach {
+                        Log.d("Firebase", "onCreate: ${it.name}")
                     }
+                }
 
-                }*/
-
-        }
+        }*/
 
     }
 

@@ -65,13 +65,14 @@ class FirebaseApi @Inject constructor(
     ) : List<Query> = suspendCoroutine { continuation ->
         val listOfQueries = mutableListOf<Query>()
         getFitnessProgramWorkout(category, nameOfWorkout)
-            .get(Source.CACHE)
+            .get()
             .addOnSuccessListener {
-                //TODO deserealize it to list
+                //TODO deserealize it to list, store it in room
+
                 val list = it.get(nameOfWorkoutPart).toString()
                 list.substring(1, list.length - 1).split(", ").forEach {
                     val query = getWorkoutExercise(nameOfWorkoutPart, it)
-                    Log.d("Firebase", "ref ${it}")
+                    //Log.d("Firebase", "ref ${it}")
                     listOfQueries.add(query)
                 }
                 continuation.resume(listOfQueries)

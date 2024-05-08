@@ -15,3 +15,4 @@ data class FitnessExercise(
     val name: String,
     val time: Long,
 )
+

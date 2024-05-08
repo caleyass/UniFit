@@ -36,13 +36,13 @@ class FitnessRestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            sharedViewModel.getCurrentFitnessProgramExercise()?.collect { fitnessExercise ->
+            sharedViewModel.getCurrentFitnessProgramExercise(increment = false)?.let { fitnessExercise ->
                 withContext(Dispatchers.Main) {
-                    binding?.tvExerciseName?.text = fitnessExercise.data?.name
+                    binding?.tvExerciseName?.text = fitnessExercise.name
                     binding?.gifImageView?.let {
                         Glide.with(requireContext())
                             .asGif()
-                            .load(fitnessExercise.data?.gif)
+                            .load(fitnessExercise.gif)
                             .into(it)
                     }
                 }

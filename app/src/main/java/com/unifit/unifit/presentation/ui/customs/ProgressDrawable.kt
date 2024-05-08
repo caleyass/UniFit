@@ -11,10 +11,8 @@ import androidx.core.content.ContextCompat
 import com.unifit.unifit.R
 
 
-internal class ProgressDrawable(private val currentLevel: Int, private val context: Context) : Drawable() {
-    companion object {
-        private const val NUM_RECTS = 3
-    }
+internal class ProgressDrawable(private val currentLevel: Int, private val maxLevel : Int, private val context: Context) : Drawable() {
+
     private var mPaint = Paint()
     override fun onLevelChange(level: Int): Boolean {
         invalidateSelf()
@@ -24,13 +22,12 @@ internal class ProgressDrawable(private val currentLevel: Int, private val conte
     override fun draw(canvas: Canvas) {
         val b = bounds
         val width = b.width().toFloat()
-        val rectWidth = width / NUM_RECTS
-        val progressWidth = currentLevel.toFloat() / 10 * width
+        val rectWidth = width / maxLevel
         //TODO MAKE IT PRETTIER
-        for (i in 0 until NUM_RECTS) {
+        for (i in 0 until maxLevel) {
             val left = rectWidth * i
-            val right = if(i == NUM_RECTS-1) left + rectWidth else left + 0.9f * rectWidth
-            mPaint.color = if (right <= progressWidth) ContextCompat.getColor(context, R.color.green_deep) else ContextCompat.getColor(context, R.color.green_light)
+            val right = if(i == maxLevel-1) left + rectWidth else left + 0.9f * rectWidth
+            mPaint.color = if (i < currentLevel) ContextCompat.getColor(context, R.color.green_deep) else ContextCompat.getColor(context, R.color.green_light)
             canvas.drawRect(left, b.top.toFloat(), right, b.bottom.toFloat(), mPaint)
         }
     }
