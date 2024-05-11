@@ -40,7 +40,6 @@ object AppModule {
     fun provideFirebaseFirestoreDb(): FirebaseFirestore {
         val db = Firebase.firestore
         db.firestoreSettings =  FirebaseFirestoreSettings.Builder()
-            .setCacheSizeBytes(1024 * 1024)
             .build()
         return db
     }

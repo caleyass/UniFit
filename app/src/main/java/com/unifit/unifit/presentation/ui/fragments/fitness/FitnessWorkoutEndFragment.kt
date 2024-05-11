@@ -1,5 +1,6 @@
 package com.unifit.unifit.presentation.ui.fragments.fitness
 
+import android.content.Context.MODE_PRIVATE
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +25,7 @@ import com.unifit.unifit.presentation.viewmodels.FitnessWorkoutEndViewModelFacto
 class FitnessWorkoutEndFragment : Fragment(){
     private var binding : FragmentFitnessWorkoutEndBinding? = null
 
-    private val sharedPreferences by lazy { requireContext().getSharedPreferences("user_data", 0) }
+    private val sharedPreferences by lazy { requireContext().getSharedPreferences("user_data", MODE_PRIVATE) }
 
     private val sharedViewModel : FitnessProgramExerciseViewModel by activityViewModels()
     private val fitnessWorkoutEndViewModel : FitnessWorkoutEndViewModel by activityViewModels{

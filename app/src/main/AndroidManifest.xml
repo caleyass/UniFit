@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
 
     <application
         android:name=".App"
@@ -16,9 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniFit"
         tools:targetApi="31">
-        <activity
-            android:name=".presentation.MainActivity2"
-            android:exported="false" />
+        <receiver
+            android:name=".domain.utils.AlarmReceiver"
+            android:enabled="true" />
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">

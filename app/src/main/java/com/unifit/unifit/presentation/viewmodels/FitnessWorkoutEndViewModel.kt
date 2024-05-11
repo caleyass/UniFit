@@ -7,7 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
 import com.unifit.unifit.R
+import com.unifit.unifit.domain.data.User
 
 class FitnessWorkoutEndViewModel(private val sharedPreferences: SharedPreferences) : ViewModel() {
     val bmiRanges = arrayOf(18.5f, 24.9f, 29.9f, 34.9f, 39.9f)
@@ -19,6 +21,8 @@ class FitnessWorkoutEndViewModel(private val sharedPreferences: SharedPreference
         R.color.obese_class_ii
     )
 
+    val user:User = Gson().fromJson(sharedPreferences.getString("user", ""), User::class.java)
+
     private val _weight = MutableLiveData<Int?>()
     val weight: LiveData<Int?> = _weight
 
@@ -28,8 +32,8 @@ class FitnessWorkoutEndViewModel(private val sharedPreferences: SharedPreference
     private val _bmi = MutableLiveData<Float?>()
     val bmi: LiveData<Float?> = _bmi
     init {
-        _weight.value = loadWeightFromSharedPreferences()
-        _height.value = loadHeightFromSharedPreferences()
+        _weight.value = user.weight
+        _height.value = user.height
         calculateBMI()
     }
     private fun loadWeightFromSharedPreferences(): Int? {

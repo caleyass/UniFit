@@ -15,15 +15,49 @@
 
     <string name="enter_age">Enter your age</string>
     <string name="enter_gender">Enter your gender</string>
+    <string name="enter_body_level">Enter your body level</string>
     <string name="enter_name">Enter your name</string>
 
+    <string name="enter_time">Enter time</string>
+
     <string name="save">Save</string>
+
+    <string name="settings">Settings</string>
+    <string name="music">Music</string>
+    <string name="profile">Profile</string>
+
+    <string name="fitness_reminder">Fitness reminder</string>
+
+    <string name="shared_preferences_name_user_data">user_data</string>
 
     <string name="email">Email</string>
     <string name="password">Password</string>
 
     <string name="signup">Sign up</string> <!-- Register button -->
     <string name="login">Log in</string> <!-- Login button -->
+    <string name="signout">Sign out</string>
+
+    <string name="age_text">Age: %d</string>
+    <string name="gender_text">Gender: %s</string>
+    <string name="body_level_text">Body level: %s</string>
+    <string name="desired_weight_text">Desired weight: %d kg</string>
 
     <string name="web_client_id">1035713250501-dat93ssictnt7t6l0rnugcn3vgbuf39m.apps.googleusercontent.com</string>
+
+    <string name="reminders_notification_channel_id">1</string>
+    <string name="title_notification_reminder">title</string>
+    <string name="description_notification_reminder">do workout</string>
+    <string name="reminders_notification_channel_name">channel name</string>
+
+    <string-array name="gender_options">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="body_level_options">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Professional</item>
+    </string-array>
 </resources>

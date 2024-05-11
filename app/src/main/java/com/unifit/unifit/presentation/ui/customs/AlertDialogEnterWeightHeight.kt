@@ -14,7 +14,7 @@ import java.lang.NumberFormatException
 class AlertDialogEnterWeightHeight {
     companion object {
         fun create(context: Context, saveWeightHeight: (Int, Int) -> Unit): AlertDialog {
-            val sharedPreferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+            val sharedPreferences = context.getSharedPreferences(context.getString(R.string.shared_preferences_name_user_data), Context.MODE_PRIVATE)
             val dialogView = LayoutInflater.from(context).inflate(R.layout.custom_alert_dialog_enter_weight_height, null)
 
             val builder = AlertDialog.Builder(context)

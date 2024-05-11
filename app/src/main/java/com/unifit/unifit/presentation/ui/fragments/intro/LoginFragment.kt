@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -18,6 +19,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.unifit.unifit.R
 import com.unifit.unifit.databinding.FragmentLoginBinding
+import com.unifit.unifit.presentation.ui.fragments.fitness.FitnessExerciseFragmentDirections
 
 class LoginFragment : Fragment() {
     val RC_SIGN_IN = 123
@@ -79,17 +81,11 @@ class LoginFragment : Fragment() {
                             val user = auth.currentUser
 
                             Log.d("TAG", "signInWithEmail:success $user")
-                            //updateUI(user)
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w("TAG", "signInWithEmail:failure", task.exception)
 
-                            /*Toast.makeText(
-                            baseContext,
-                            "Authentication failed.",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                        updateUI(null)*/
+                            //updateUI(user)
+                            navigateToTest()
+                        } else {
+
                         }
                     }
                     .addOnFailureListener { e ->
@@ -134,6 +130,7 @@ class LoginFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = mAuth.currentUser
                     Log.d("TAG", "firebaseAuthWithGoogle: $user")
+                    navigateToTest()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.d("TAG", "firebaseAuthWithGoogle: ${task.exception}")
@@ -141,6 +138,11 @@ class LoginFragment : Fragment() {
 //                    updateUI(null)
                 }
             }
+    }
+
+    private fun navigateToTest(){
+        val action = LoginFragmentDirections.actionLoginFragmentToTestFragment()
+        findNavController().navigate(action)
     }
 
     override fun onDestroy() {

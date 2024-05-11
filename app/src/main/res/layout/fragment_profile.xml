@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_starter"
+    tools:context=".presentation.ui.fragments.main.ProfileFragment">
+
+    <com.unifit.unifit.presentation.ui.customs.BackButtonView
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"/>
+
+    <ImageView
+        android:id="@+id/btnEdit"
+        android:layout_width="@dimen/baseline_size"
+        android:layout_height="@dimen/baseline_size"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:src="@drawable/baseline_mode_edit_24" />
+
+
+    <TextView
+        android:id="@+id/tvName"
+        tools:text="Name"
+        style="@style/TextViewTitle"
+        android:background="@color/transparent_white"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/TextViewTitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:background="@color/transparent_white"
+        tools:text="email" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/tvEmail">
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tvAge"
+            style="@style/TextViewTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:background="@color/transparent_white"
+            tools:text="Age: 14"
+            android:text=""/>
+
+        <TextView
+            android:id="@+id/tvGender"
+            style="@style/TextViewTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:background="@color/transparent_white"
+            tools:text="Gender: female" />
+
+            <TextView
+                android:id="@+id/tvBodyLevel"
+                style="@style/TextViewTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvName"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/margin_10"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:background="@color/transparent_white"
+                tools:text="Body level: beginner" />
+        </LinearLayout>
+        </HorizontalScrollView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvWeightHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            app:cardCornerRadius="@dimen/card_view_corner_radius"
+            app:cardBackgroundColor="@color/transparent_white"
+            app:cardElevation="0dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_10">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_alignParentStart="true">
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:text="@string/weight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextViewTitle2"/>
+                    <TextView
+                        android:id="@+id/tvWeightValue"
+                        android:text="@string/enter_weight"
+                        android:layout_marginHorizontal="@dimen/margin_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvWeight"
+                        style="@style/TextViewPlain"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_alignParentEnd="true">
+                    <TextView
+                        android:id="@+id/tvHeight"
+                        android:text="@string/height"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextViewTitle2"/>
+                    <TextView
+                        android:id="@+id/tvHeightValue"
+                        android:text="@string/enter_height"
+                        android:layout_marginHorizontal="@dimen/margin_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvWeight"
+                        style="@style/TextViewPlain"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            app:cardCornerRadius="@dimen/card_view_corner_radius"
+            app:cardBackgroundColor="@color/transparent_white"
+            app:cardElevation="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/margin_10">
+
+                <TextView
+                    android:id="@+id/tvBMI"
+                    android:text="BMI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextViewTitle2"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/tvBMIValue"
+                    tools:text="19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/tvBMI"
+                    style="@style/TextViewPlain"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBarBMI"
+                    android:layout_below="@id/tvBMIValue"
+                    android:layout_width="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                    android:max="50"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvDesiredWeight"
+            android:text="@string/enter_desired_weight"
+            style="@style/TextViewTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_10"
+            android:layout_marginStart="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:background="@color/transparent_white"
+            tools:text="Desired weight: 50kg" />
+
+    </LinearLayout>
+
+    <Button
+        style="@style/ButtonPlain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:text="@string/signout" />
+</RelativeLayout>
+</layout>

@@ -16,4 +16,6 @@
     <dimen name="text_size_title">26sp</dimen>
     <dimen name="text_size_title2">20sp</dimen>
 
+    <dimen name="baseline_size">40dp</dimen>
+
 </resources>

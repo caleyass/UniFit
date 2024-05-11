@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<layout>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_starter"
-    >
+    tools:context=".presentation.ui.fragments.intro.TestFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
-
+        android:gravity="center_horizontal"
+        >
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -30,13 +32,13 @@
                     style="@style/TextViewTitle2"
                     android:layout_margin="@dimen/margin_10"/>
                 <EditText
-                    android:id="@+id/etEmail"
+                    android:id="@+id/etName"
                     style="@style/TextViewPlain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="@dimen/margin_10"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:textColorHint="@color/black"
                     />
             </LinearLayout>
@@ -159,6 +161,7 @@
                     android:id="@+id/spinnerGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:entries="@array/gender_options"
                     />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -174,27 +177,28 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <TextView
-                    style="@style/TextViewTitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_10"
                     android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_10"
                     android:layout_marginBottom="@dimen/margin_10"
-                    android:text="@string/enter_gender" />
+                    style="@style/TextViewTitle2"
+                    android:text="@string/enter_body_level" />
 
                 <Spinner
                     android:id="@+id/spinnerLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:textSize="30sp"
+                    android:entries="@array/body_level_options"
                     />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/btnSave"
             style="@style/ButtonPlain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -203,3 +207,4 @@
     </LinearLayout>
 
 </ScrollView>
+</layout>
