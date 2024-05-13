@@ -1,6 +1,8 @@
 package com.unifit.unifit.presentation.ui.fragments.intro
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -52,6 +55,8 @@ class LoginFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        grantPostNotificationPermission()
+
         auth = Firebase.auth
 
         etEmail = binding?.etEmail
@@ -67,7 +72,6 @@ class LoginFragment : Fragment() {
         binding?.signInButtonGoogle?.setOnClickListener {
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, 123)
-
         }
 
         binding?.login?.setOnClickListener {
@@ -138,6 +142,16 @@ class LoginFragment : Fragment() {
 //                    updateUI(null)
                 }
             }
+    }
+
+    private fun grantPostNotificationPermission(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                1
+            )
+        }
     }
 
     private fun navigateToTest(){

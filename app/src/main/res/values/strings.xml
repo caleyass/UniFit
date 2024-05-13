@@ -49,6 +49,18 @@
     <string name="description_notification_reminder">do workout</string>
     <string name="reminders_notification_channel_name">channel name</string>
 
+    <string name="pills">Pills</string>
+    <string name="analysis">Analysis</string>
+    <string name="alarms">Alarms</string>
+
+
+    <string name="day_left">Day left:\n%d</string>
+    <string name="date">Date:\n%d</string>
+
+    <string name="sleep_time">Sleep time:\n%d hours</string>
+
+    <string name="dose">/day</string>
+
     <string-array name="gender_options">
         <item>Male</item>
         <item>Female</item>

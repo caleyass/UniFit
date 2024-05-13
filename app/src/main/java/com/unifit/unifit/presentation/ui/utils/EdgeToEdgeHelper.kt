@@ -18,7 +18,7 @@ object EdgeToEdgeHelper {
             // insets are appropriate to your layout. You can also update the view padding
             // if that's more appropriate.
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                topMargin = insets.top + v.marginTop
+                topMargin = insets.top
                 Log.d("TAG", "updateMarginToStatusBarInsets: $topMargin")
             }
             WindowInsetsCompat.CONSUMED

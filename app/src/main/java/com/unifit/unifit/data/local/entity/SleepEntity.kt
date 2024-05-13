@@ -1,13 +1,13 @@
 package com.unifit.unifit.data.local.entity
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
-@Entity(tableName = "fitness_category")
-data class FitnessCategoryEntity (
+@Entity(tableName = "sleep")
+data class SleepEntity (
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-    var name: String,
-    var imageUri:String?
-)
+    var start : Date,
+    var end : Date,
+    )

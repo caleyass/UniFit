@@ -7,11 +7,17 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.unifit.unifit.data.local.dao.AlarmDao
+import com.unifit.unifit.data.local.dao.AnalysisDao
 import com.unifit.unifit.data.local.dao.FitnessExercisesDao
-import com.unifit.unifit.data.local.database.FitnessDatabase
+import com.unifit.unifit.data.local.dao.PillDao
+import com.unifit.unifit.data.local.dao.SleepDao
+import com.unifit.unifit.data.local.database.MyDatabase
 import com.unifit.unifit.data.remote.FirebaseApi
 import com.unifit.unifit.data.repository.FitnessRepositoryImpl
+import com.unifit.unifit.data.repository.PillRepositoryImpl
 import com.unifit.unifit.domain.repositories.FitnessRepository
+import com.unifit.unifit.domain.repositories.PillRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,15 +31,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFitnessDatabase(@ApplicationContext context : Context): FitnessDatabase {
-        return FitnessDatabase.getDatabase(context)
+    fun provideFitnessDatabase(@ApplicationContext context : Context): MyDatabase {
+        return MyDatabase.getDatabase(context)
     }
 
-    @Provides
+/*    @Provides
     @Singleton
-    fun provideFitnessExercisesDao(db: FitnessDatabase): FitnessExercisesDao {
+    fun provideFitnessExercisesDao(db: MyDatabase): FitnessExercisesDao {
         return db.fitnessExercisesDao
-    }
+    }*/
 
     @Provides
     @Singleton
@@ -55,8 +61,38 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideFitnessRepository(firebaseApi: FirebaseApi, fitnessExercisesDao: FitnessExercisesDao): FitnessRepository {
-        return FitnessRepositoryImpl(firebaseApi, fitnessExercisesDao)
+    fun provideFitnessRepository(firebaseApi: FirebaseApi): FitnessRepository {
+        return FitnessRepositoryImpl(firebaseApi)
+    }
+
+    @Provides
+    @Singleton
+    fun providePillRepository(pillDao: PillDao): PillRepository {
+        return PillRepositoryImpl(pillDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAlarmDao(db: MyDatabase): AlarmDao {
+        return db.alarmDao
+    }
+
+    @Provides
+    @Singleton
+    fun providePillDao(db: MyDatabase): PillDao {
+        return db.pillDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideSleepDao(db: MyDatabase): SleepDao {
+        return db.sleepDao
+    }
+
+    @Provides
+    @Singleton
+    fun provideAnalysisDao(db: MyDatabase): AnalysisDao {
+        return db.analysisDao
     }
 
     @Provides

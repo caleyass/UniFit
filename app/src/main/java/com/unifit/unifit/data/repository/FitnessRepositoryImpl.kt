@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.unifit.unifit.data.local.APP_CONSTANTS
+import com.unifit.unifit.data.local.dao.AlarmDao
 import com.unifit.unifit.data.local.dao.FitnessExercisesDao
 import com.unifit.unifit.data.mappers.toFitnessCategory
 import com.unifit.unifit.data.mappers.toFitnessWorkout
@@ -26,7 +27,6 @@ import javax.inject.Inject
 
 class FitnessRepositoryImpl @Inject constructor(
     private val firebaseApi: FirebaseApi,
-    private val fitnessExercisesDao: FitnessExercisesDao
 ) : FitnessRepository {
 
     override fun getFitnessProgramWorkouts(categoryName : String): Flow<PagingData<FitnessWorkout>> {

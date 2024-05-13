@@ -50,7 +50,7 @@ class FitnessProgramFragment : Fragment() {
         binding?.recyclerView?.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.flowFitnessWorkouts.collectLatest {
+            viewModel.flowFitnessWorkouts.collect {
                 adapter.submitData(it)
             }
         }

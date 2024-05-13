@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+
+    >
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginVertical="@dimen/margin_10"
+    android:background="@color/transparent_white"
+    android:orientation="horizontal"
+    android:id="@+id/layoutItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvItemName"
+        tools:text="Ibuprofen"
+        style="@style/TextViewTitle2"
+        android:maxWidth="250dp"
+        android:minWidth="150dp"
+        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        />
+
+
+    <TextView
+        android:id="@+id/tvItemDescription"
+        tools:text="Day left\n2"
+        style="@style/TextViewPlain"
+        android:maxWidth="250dp"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_10"
+        />
+</RelativeLayout>
+</layout>

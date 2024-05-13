@@ -24,9 +24,7 @@ class BackButtonView @JvmOverloads constructor(
 
         // Set the click listener to navigate up in the navigation graph
         setOnClickListener {
-            val navController = findNavController()
-            navController.navigateUp()
-            Log.d("Back", ": clicked")
+            findNavController().navigateUp()
         }
     }
 }

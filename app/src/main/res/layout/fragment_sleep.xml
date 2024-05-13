@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_pills"
-    android:orientation="vertical">
-
+    android:background="@drawable/bg_sleep"
+    android:orientation="vertical"
+    tools:context=".presentation.ui.fragments.sleep.SleepFitness">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,6 +20,7 @@
             android:layout_height="match_parent"/>
 
         <ImageView
+            android:id="@+id/ivAddPill"
             android:layout_alignParentEnd="true"
             android:src="@drawable/baseline_add_24"
             android:layout_width="@dimen/baseline_size"
@@ -27,9 +29,9 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPills"
+        android:id="@+id/rvSleep"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_10"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
+</layout>
