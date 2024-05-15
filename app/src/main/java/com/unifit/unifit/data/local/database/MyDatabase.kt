@@ -9,27 +9,29 @@ import com.unifit.unifit.data.local.converter.DateConverter
 import com.unifit.unifit.data.local.converter.LocalDateConverter
 import com.unifit.unifit.data.local.dao.AlarmDao
 import com.unifit.unifit.data.local.dao.AnalysisDao
-import com.unifit.unifit.data.local.dao.FitnessExercisesDao
 import com.unifit.unifit.data.local.dao.PillDao
 import com.unifit.unifit.data.local.dao.SleepDao
+import com.unifit.unifit.data.local.dao.TrainingDao
 import com.unifit.unifit.data.local.entity.AlarmEntity
 import com.unifit.unifit.data.local.entity.AnalysisEntity
 import com.unifit.unifit.data.local.entity.PillEntity
 import com.unifit.unifit.data.local.entity.SleepEntity
+import com.unifit.unifit.data.local.entity.TrainingEntity
 
 
 @Database(entities = [
     AlarmEntity::class,
     AnalysisEntity::class,
     PillEntity::class,
-    SleepEntity::class ], version = 4, exportSchema = false)
-@TypeConverters(LocalDateConverter::class)
+    SleepEntity::class,
+    TrainingEntity::class], version = 4, exportSchema = false)
+@TypeConverters(LocalDateConverter::class, DateConverter::class)
 abstract class MyDatabase : RoomDatabase() {
     abstract val alarmDao : AlarmDao
     abstract val analysisDao : AnalysisDao
     abstract val pillDao : PillDao
     abstract val sleepDao : SleepDao
-
+    abstract val trainingDao : TrainingDao
     companion object{
         @Volatile
         private var INSTANCE: MyDatabase? = null

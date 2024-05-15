@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
 
 object EdgeToEdgeHelper {
     fun updateMarginToStatusBarInsets(view: View) {
@@ -25,13 +23,16 @@ object EdgeToEdgeHelper {
         }
     }
 
-    fun updatePaddingToSystemBarsInsets(view: View) {
+    fun updateMarginToSystemBarsInsets(view: View) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.updatePadding(
+            /*v.updatePadding(
                 top = insets.top,
                 bottom = insets.bottom
-            )
+            )*/
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = insets.bottom
+            }
             /*v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = insets.bottom + v.marginBottom
                 topMargin = insets.top + v.marginTop

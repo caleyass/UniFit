@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.unifit.unifit.R
 import com.unifit.unifit.databinding.FragmentProfileBinding
+import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper
 import com.unifit.unifit.presentation.viewmodels.FitnessWorkoutEndViewModel
 import com.unifit.unifit.presentation.viewmodels.FitnessWorkoutEndViewModelFactory
 
@@ -38,6 +37,13 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.btnEdit?.let {
+            EdgeToEdgeHelper.updateMarginToStatusBarInsets(it)
+        }
+        binding?.btnSignOut?.let {
+            EdgeToEdgeHelper.updateMarginToSystemBarsInsets(it)
+        }
+
         binding?.btnEdit?.setOnClickListener {
             onEditClicked()
         }

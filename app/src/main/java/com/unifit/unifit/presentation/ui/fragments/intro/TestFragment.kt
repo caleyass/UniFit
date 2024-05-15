@@ -13,7 +13,7 @@ import com.google.gson.Gson
 import com.unifit.unifit.R
 import com.unifit.unifit.databinding.FragmentTestBinding
 import com.unifit.unifit.domain.data.User
-import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper.updatePaddingToSystemBarsInsets
+import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper.updateMarginToSystemBarsInsets
 
 class TestFragment : Fragment() {
     private var binding : FragmentTestBinding? = null
@@ -28,7 +28,7 @@ class TestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.linearLayout?.let { updatePaddingToSystemBarsInsets(it) }
+        binding?.linearLayout?.let { updateMarginToSystemBarsInsets(it) }
 
         binding?.btnSave?.setOnClickListener {
 

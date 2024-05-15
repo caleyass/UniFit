@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.databinding.FragmentFitnessRestBinding
+import com.unifit.unifit.presentation.ui.utils.EdgeToEdgeHelper
 import com.unifit.unifit.presentation.viewmodels.FitnessProgramExerciseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,9 @@ class FitnessRestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding?.btnSkip?.let {
+            EdgeToEdgeHelper.updateMarginToSystemBarsInsets(it)
+        }
         CoroutineScope(Dispatchers.IO).launch {
             sharedViewModel.getCurrentFitnessProgramExercise(increment = false)?.let { fitnessExercise ->
                 withContext(Dispatchers.Main) {

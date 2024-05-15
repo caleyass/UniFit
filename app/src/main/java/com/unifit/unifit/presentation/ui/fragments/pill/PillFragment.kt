@@ -31,7 +31,7 @@ class PillFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.ivAddPill?.let { EdgeToEdgeHelper.updateMarginToStatusBarInsets(it) }
 
-        binding?.rvPills?.adapter = PillAdapter()
+        binding?.rvPills?.adapter = PillAdapter({})
         pillViewModel.pillsLiveData.observe(viewLifecycleOwner){
             (binding?.rvPills?.adapter as PillAdapter).submitList(it)
         }
@@ -44,6 +44,4 @@ class PillFragment : Fragment() {
         val action = PillFragmentDirections.actionPillFragmentToPillInfoFragment()
         findNavController().navigate(action)
     }
-
-
 }

@@ -9,7 +9,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.unifit.unifit.data.local.dao.AlarmDao
 import com.unifit.unifit.data.local.dao.AnalysisDao
-import com.unifit.unifit.data.local.dao.FitnessExercisesDao
 import com.unifit.unifit.data.local.dao.PillDao
 import com.unifit.unifit.data.local.dao.SleepDao
 import com.unifit.unifit.data.local.database.MyDatabase

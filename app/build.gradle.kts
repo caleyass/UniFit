@@ -93,6 +93,7 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:$hilt_version")
     kaptTest("com.google.dagger:hilt-compiler:$hilt_version")
 
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
 //    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     //implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
@@ -108,6 +109,7 @@ dependencies {
 
     implementation("com.google.code.gson:gson:2.10.1")
 
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 }
 kapt {

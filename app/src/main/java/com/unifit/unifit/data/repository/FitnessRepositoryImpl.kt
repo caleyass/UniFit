@@ -7,8 +7,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.unifit.unifit.data.local.APP_CONSTANTS
-import com.unifit.unifit.data.local.dao.AlarmDao
-import com.unifit.unifit.data.local.dao.FitnessExercisesDao
 import com.unifit.unifit.data.mappers.toFitnessCategory
 import com.unifit.unifit.data.mappers.toFitnessWorkout
 import com.unifit.unifit.data.remote.FirebaseApi
@@ -16,11 +14,9 @@ import com.unifit.unifit.data.remote.paging.paging_source.FitnessPagingSource
 import com.unifit.unifit.data.utils.Resource
 import com.unifit.unifit.domain.data.FitnessCategory
 import com.unifit.unifit.domain.data.FitnessExercise
-import com.unifit.unifit.domain.data.FitnessProgramExercises
 import com.unifit.unifit.domain.data.FitnessWorkout
 import com.unifit.unifit.domain.repositories.FitnessRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject

@@ -2,21 +2,18 @@ package com.unifit.unifit.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
-import androidx.room.Query
 import androidx.room.Upsert
-import com.unifit.unifit.data.local.entity.FitnessExercisesEntity
-import com.unifit.unifit.domain.data.FitnessExercise
-import kotlinx.coroutines.flow.Flow
+import com.unifit.unifit.data.local.entity.TrainingEntity
 
 @Dao
-interface FitnessExercisesDao {
+interface TrainingDao {
     @Upsert
-    suspend fun upsertExercises(exercises: FitnessExercisesEntity)
+    suspend fun upsertExercises(exercises: TrainingEntity)
 
     //TODO: add here loading next exercise in advance
     /*@Query("SELECT * FROM fitness_exercises")
     fun getExercises(name:String, part:String): Flow<List<com.google.firebase.firestore.Query>>
 */
     @Delete
-    suspend fun deleteExercise(exercise: FitnessExercisesEntity)
+    suspend fun deleteExercise(exercise: TrainingEntity)
 }
