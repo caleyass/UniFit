@@ -21,4 +21,8 @@ interface AnalysisDao {
 
     @Delete
     suspend fun delete(analysisEntity: AnalysisEntity)
+
+    @Query("DELETE FROM analysis")
+    suspend fun clearAll()
+
 }

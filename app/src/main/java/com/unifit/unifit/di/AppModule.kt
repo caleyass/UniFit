@@ -13,8 +13,10 @@ import com.unifit.unifit.data.local.dao.PillDao
 import com.unifit.unifit.data.local.dao.SleepDao
 import com.unifit.unifit.data.local.database.MyDatabase
 import com.unifit.unifit.data.remote.FirebaseApi
+import com.unifit.unifit.data.repository.AnalysisRepositoryImpl
 import com.unifit.unifit.data.repository.FitnessRepositoryImpl
 import com.unifit.unifit.data.repository.PillRepositoryImpl
+import com.unifit.unifit.domain.repositories.AnalysisRepository
 import com.unifit.unifit.domain.repositories.FitnessRepository
 import com.unifit.unifit.domain.repositories.PillRepository
 import dagger.Module
@@ -62,6 +64,12 @@ object AppModule {
     @Singleton
     fun provideFitnessRepository(firebaseApi: FirebaseApi): FitnessRepository {
         return FitnessRepositoryImpl(firebaseApi)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAnalysisRepository(analysisDao: AnalysisDao): AnalysisRepository {
+        return AnalysisRepositoryImpl(analysisDao)
     }
 
     @Provides

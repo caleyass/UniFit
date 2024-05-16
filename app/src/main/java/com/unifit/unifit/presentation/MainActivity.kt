@@ -20,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.unifit.unifit.R
 import com.unifit.unifit.data.local.database.MyDatabase
 import com.unifit.unifit.data.local.entity.AlarmEntity
+import com.unifit.unifit.data.local.entity.AnalysisEntity
 import com.unifit.unifit.data.local.entity.PillEntity
 import com.unifit.unifit.data.remote.FirebaseApi
 import com.unifit.unifit.data.repository.FitnessRepositoryImpl
@@ -53,20 +54,24 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val alarmDao = MyDatabase.getDatabase(this@MainActivity).alarmDao
+            val analysisDao = MyDatabase.getDatabase(this@MainActivity).analysisDao
             val pill = PillEntity(
-                name = "fdf",
+                name = "Vitamin D",
                 dose = 2,
-                endDate = LocalDate.of(2025,5,12)
+                endDate = LocalDate.of(2025,5,18)
             )
+            launch(Dispatchers.IO){
+                analysisDao.clearAll()
+                analysisDao.insert(AnalysisEntity(name = "Vitamin D", date = LocalDate.of(2025,5,20), doctor = "Dr. John Doe"))
+            }
             launch(Dispatchers.IO) {
-
 
                 pillDao.clearAllPills()
                 pillDao.insertPill(
                     PillEntity(
                         name = "Ibuprofen",
                         dose = 2,
-                        endDate = LocalDate.of(2024,5,12)
+                        endDate = LocalDate.of(2024,5,18)
                     )
                 )
 

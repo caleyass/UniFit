@@ -72,4 +72,10 @@
     <style name="SwitchTheme" parent="Theme.AppCompat.Light">
         <item name="android:colorControlActivated">@color/green_deep</item>
     </style>
+
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/green_light</item>
+
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
 </resources>

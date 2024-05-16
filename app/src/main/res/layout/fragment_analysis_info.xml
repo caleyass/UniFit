@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_pills"
+        android:orientation="vertical"
+        tools:context=".presentation.ui.fragments.pill.AnalysisFragment">
+        <com.unifit.unifit.presentation.ui.customs.BackButtonView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/transparent_white"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/etPillName"
+                style="@style/TextViewPlain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="@dimen/margin_10"
+                android:inputType="text"
+                android:hint="Name of analysis"
+                android:textColorHint="@color/black"
+                />
+
+            <EditText
+                android:id="@+id/tvEndDate"
+                android:layout_marginVertical="@dimen/margin_10"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextViewPlain"
+                android:hint="Doctor's name"
+                android:textColorHint="@color/black"
+                />
+
+        </LinearLayout>
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_transparent_white"
+            android:layout_marginVertical="@dimen/margin_10"
+            android:firstDayOfWeek="1"
+            android:theme="@style/CalenderViewCustom"/>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            style="@style/ButtonPlain"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/margin_10"
+            android:textColor="@color/white"
+            android:padding="@dimen/margin_10" />
+    </LinearLayout>
+</layout>

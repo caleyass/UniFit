@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-
-    >
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <RelativeLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginVertical="@dimen/margin_10"
     android:background="@color/transparent_white"
     android:orientation="horizontal"
@@ -31,11 +28,24 @@
         style="@style/TextViewPlain"
         android:maxWidth="250dp"
         android:textAlignment="center"
+        android:layout_toStartOf="@id/ivItemDelete"
         android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margin_10"
         />
+
+    <ImageView
+        android:id="@+id/ivItemDelete"
+        android:layout_width="@dimen/baseline_size"
+        android:layout_height="@dimen/baseline_size"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:src="@drawable/baseline_delete_24" />
+
 </RelativeLayout>
 </layout>

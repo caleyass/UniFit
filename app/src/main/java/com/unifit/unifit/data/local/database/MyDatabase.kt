@@ -24,7 +24,7 @@ import com.unifit.unifit.data.local.entity.TrainingEntity
     AnalysisEntity::class,
     PillEntity::class,
     SleepEntity::class,
-    TrainingEntity::class], version = 4, exportSchema = false)
+    TrainingEntity::class], version = 5, exportSchema = false)
 @TypeConverters(LocalDateConverter::class, DateConverter::class)
 abstract class MyDatabase : RoomDatabase() {
     abstract val alarmDao : AlarmDao

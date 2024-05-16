@@ -8,7 +8,6 @@ import java.time.LocalDate
 data class TrainingEntity(
     @PrimaryKey(autoGenerate = true)
     var id : Int,
-    var category : String,
     var date : LocalDate,
     var caloriesBurned : Float
 )

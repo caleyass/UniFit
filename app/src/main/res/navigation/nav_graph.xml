@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/starterFragment">
+    app:startDestination="@id/pillFragment">
 
     <fragment
         android:id="@+id/fitnessFragment"
@@ -132,6 +132,9 @@
         <action
             android:id="@+id/action_pillFragment_to_pillInfoFragment"
             app:destination="@id/pillInfoFragment" />
+        <action
+            android:id="@+id/action_pillFragment_to_analysisFragment"
+            app:destination="@id/analysisFragment" />
     </fragment>
     <fragment
         android:id="@+id/pillInfoFragment"
@@ -140,7 +143,12 @@
         tools:layout="@layout/fragment_pill_info"/>
     <fragment
         android:id="@+id/sleepFitness"
-        android:name="com.unifit.unifit.presentation.ui.fragments.sleep.SleepFitness"
+        android:name="com.unifit.unifit.presentation.ui.fragments.sleep.SleepFragment"
         android:label="SleepFitness"
         tools:layout="@layout/fragment_sleep"/>
+    <fragment
+        android:id="@+id/analysisFragment"
+        android:name="com.unifit.unifit.presentation.ui.fragments.pill.AnalysisFragment"
+        android:label="AnalysisFragment"
+        tools:layout="@layout/fragment_analysis_info"/>
 </navigation>

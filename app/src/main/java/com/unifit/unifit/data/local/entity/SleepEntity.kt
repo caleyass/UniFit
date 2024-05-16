@@ -10,4 +10,5 @@ data class SleepEntity (
     var id: Int = 0,
     var start : Date,
     var end : Date,
+    var quality : Int
     )

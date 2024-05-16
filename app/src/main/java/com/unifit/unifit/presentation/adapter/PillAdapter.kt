@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.unifit.unifit.R
 import com.unifit.unifit.data.local.entity.PillEntity
-import com.unifit.unifit.databinding.ItemRvTextDescriptionBinding
+import com.unifit.unifit.databinding.ItemRvTextDescriptionIvBinding
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -15,7 +15,7 @@ class PillAdapter(
     private val onItemClicked: (PillEntity) -> Unit
 ) : ListAdapter<PillEntity, PillAdapter.PillViewHolder>(DiffCallback) {
 
-    class PillViewHolder(private val binding: ItemRvTextDescriptionBinding, private val onItemClicked: (PillEntity) -> Unit) :
+    class PillViewHolder(private val binding: ItemRvTextDescriptionIvBinding, private val onItemClicked: (PillEntity) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind (pill: PillEntity){
             binding.apply {
@@ -50,7 +50,7 @@ class PillAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PillViewHolder {
         return PillViewHolder(
-            ItemRvTextDescriptionBinding.inflate(
+            ItemRvTextDescriptionIvBinding.inflate(
                 LayoutInflater.from(
                     parent.context
                 )
